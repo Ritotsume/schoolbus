@@ -1,0 +1,41 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /schoolbus
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Paginas de controle
+    RewriteRule ^aluno/?$ index.php?pag=aluno [NC,L]
+    RewriteRule ^aluno/cadastro/?$ index.php?pag=aluno&view=cadastra [NC,L]
+
+    RewriteRule ^escola/?$ index.php?pag=escola [NC,L]
+    RewriteRule ^escola/cadastro/?$ index.php?pag=escola&view=cadastra [NC,L]
+    RewriteRule ^escola/delete/([0-9])/?$ index.php?pag=escola&var=delete&del=$1 [NC,L]
+#    RewriteRule ^instituicao/update/?$ index.php?pag=escola&view=update$ [NC,L]
+#    RewriteRule ^instituicao\/update\/atualizar\/([0-9])\/?$ index.php?pag=escola&view=update&var=atualizar&del=$1 [NC,L]
+
+    RewriteRule ^motorista/?$ index.php?pag=motorista [NC,L]
+    RewriteRule ^motorista/cadastro/?$ index.php?pag=motorista&view=cadastra [NC,L]
+    RewriteRule ^motorista/delete/([0-9])/?$ index.php?pag=motorista&var=delete&del=$1 [NC,L]
+
+    RewriteRule ^veiculo/?$ index.php?pag=veiculo [NC,L]
+    RewriteRule ^veiculo/cadastro/?$ index.php?pag=veiculo&view=cadastra [NC,L]
+    RewriteRule ^veiculo/delete/(.*)/?$ index.php?pag=veiculo&var=delete&del=$1 [NC,L]
+    # Pagina home ou index
+    RewriteRule ^(home/?|/?)$ index.php?pag=home [NC,L]
+    # Pagina sobre
+    RewriteRule ^sobre/?$ index.php?pag=sobre [NC,L]
+    # Pagina matricula
+    RewriteRule ^matricula/?$ index.php?pag=matricula [NC,L]
+    # Pagina loginlista com logoff
+    RewriteRule ^loginlista/(.*)/?$ index.php?pag=loginlista&logoff=logoff [NC,L]
+    # Pagina single
+    RewriteRule ^(.*)/([0-9])/?$ index.php?pg=single&name=$1&id=$2 [NC,L]
+    # Erro 401  Unauthorized
+    ErrorDocument 401 /schoolbus/index.php?pag=401
+    # Erro 403  Forbidden
+    ErrorDocument 403 /schoolbus/index.php?pag=403
+    # Erro 404 Not found
+    ErrorDocument 404 /schoolbus/index.php?pag=404
+    # Erro 500 Internal Server Error
+    ErrorDocument 500 /schoolbus/index.php?pag=500
+</IfModule>

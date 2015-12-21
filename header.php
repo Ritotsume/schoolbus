@@ -36,4 +36,4 @@
   <![endif]-->
 </head>
 <body class="theme">
-  <div class="container">
+  <div class="container-fluid">

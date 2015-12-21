@@ -16,4 +16,5 @@ $pageatual = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
 	<a href="<?= HOME; ?>motorista" class="btn btn-default btn-block <?= ($pageatual == 'motorista') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-users"></i> Cadastrar motorista</a>
 	<a href="<?= HOME; ?>veiculo" class="btn btn-default btn-block <?= ($pageatual == 'veiculo') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-bus"></i> Cadastrar veículos</a>
 	<a href="#relatorios" class="btn btn-default btn-block <?= ($pageatual == 'relatorios') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-bus"></i> Relatórios</a>
+	<a href="#" class="btn btn-default btn-block" onclick="toggleTheme()" role="button"><i class="fa fa-bus"></i> Mudar tema</a>
 </aside>

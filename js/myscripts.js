@@ -98,6 +98,19 @@ function modals(tipo){
 function addPhone(ele)
 {
   var telefone = $(ele).prev('input[name=telefone]').val();
-  var novoInput = '<div class="label-input tel-div"><input type="text" name="telefone_numero[]" value="' + telefone + '" readonly="readonly" /><i class="fa fa-minus-circle text-theme" onclick="removeI(this)"></i></div>';
+  var novoInput = '<div class="tel-div"><input type="text" name="telefone_numero[]" value="' + telefone + '" readonly="readonly" /><button type="button" class="btn-input-tel" onclick="removeI(this)"><i class="fa fa-minus-circle"></i></button></div>';
   $("#telefones").append(novoInput).fadeIn();
+}
+
+function toggleTheme()
+{
+  if($('body').hasClass('theme') && localStorage.getItem('theme') === "dark"){
+    localStorage.clear();
+    localStorage.setItem("theme", "light");
+    location.reload();
+  }else{
+    localStorage.clear();
+    localStorage.setItem("theme", "dark");
+    location.reload();
+  }
 }

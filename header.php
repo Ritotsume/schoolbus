@@ -12,7 +12,17 @@
   <!-- Bootstrap -->
   <link href="<?= HOME; ?>css/bootstrap.min.css" rel="stylesheet">
   <link href="<?= HOME; ?>css/style.css" rel="stylesheet">
-  <link href="<?= HOME; ?>css/theme-dark.css" rel="stylesheet">
+
+  <!-- Themes -->
+  <script type="text/javascript">
+  if(localStorage.getItem("theme")){
+    var theme = localStorage.getItem("theme");
+    window.document.write("<link href=\"<?= HOME; ?>css/theme-"+ theme +".css\" rel=\"stylesheet\">");
+  }else{
+    window.document.write("<link href=\"<?= HOME; ?>css/theme-dark.css\" rel=\"stylesheet\">");
+  }
+  </script>
+  <!-- <link href="<?= HOME; ?>css/theme-dark.css" rel="stylesheet"> -->
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and
   media queries -->
@@ -25,5 +35,5 @@
   src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="dark">
+<body class="theme">
   <div class="container">

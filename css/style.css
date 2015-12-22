@@ -20,3 +20,5 @@ aside.menu > a.btn-default{border: none; transition: .2s;}
 .area-search{margin-bottom: 2em;}
 .btn-search{position: absolute; top: .5em; right: 1.3em; line-height: 0; padding: .3em .3em; border: none;}
 .btn-input-tel{position: absolute; top: 2.3em; right: 1.3em; line-height: 0; padding: .3em .3em; border: none;}
+
+.modal-content{border-radius: 0}

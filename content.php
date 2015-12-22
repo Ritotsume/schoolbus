@@ -1,16 +1,16 @@
-<?php
-$page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
-$view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
-$erros = array('401', '403', '404', '500');
-//
-//    if (isset($page) && $page != 'home'):
-//        include_once './controls.php';
-//    endif;
+<form action="" method="post">
+  <?php
+  $page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
+  $view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
+  $erros = array('401', '403', '404', '500');
+  //
+  //    if (isset($page) && $page != 'home'):
+  //        include_once './controls.php';
+  //    endif;
 
-include_once './controls.php';
-?>
-<div class="col-md-9">
-  <form action="" method="post">
+  include_once './controls.php';
+  ?>
+  <div class="col-md-9">
     <?php
     if (!in_array($page, $erros)):
       if (isset($page) && !empty($page)):
@@ -34,6 +34,7 @@ include_once './controls.php';
   <script type="text/javascript" src="<?= HOME; ?>js/bootstrap.js"></script>
   <script type="text/javascript" src="<?= HOME; ?>js/bootstrap.min.js"></script>
   <script type="text/javascript" src="<?= HOME; ?>js/npm.js"></script>
+  <script type="text/javascript" src="<?= HOME; ?>js/bootbox.js"></script>
   <script type="text/javascript" src="<?= HOME; ?>js/myscripts.js"></script>
 </body>
 </html>

@@ -2,22 +2,29 @@
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 if (isset($dados) && !empty($dados)):
-    if (isset($dados['cadastrar'])):
-        unset($dados['search_form'], $dados['cadastrar']);
-        $cadaluno = new ModelAluno();
+  if (isset($dados['cadastrar'])):
+    unset($dados['search_form'], $dados['telefone_numero'], $dados['cadastrar']);
+    $cadaluno = new ModelAluno();
 
-        $cadaluno->ModelCreator($dados);
-        if ($cadaluno->getRowCount()):
-            ADSError('Dados cadastrados com sucesso!!!', CRAZY_ACCEPT);
-            ?>
-            <script type="text/javascript">
-                var teste = location.href = "<?= HOME; ?>aluno";
-            </script>
-            <?php
-        else:
-            ADSError('Erro ao cadastrar, verifique e tente novamente!!', CRAZY_ALERT);
-        endif;
+    $cadaluno->ModelCreator($dados);
+    if ($cadaluno->getRowCount()):
+      ?>
+      <script type="text/javascript">
+      bootbox.alert('Aluno cadastrado com sucesso!!', function(ex){
+        location.href = "<?= HOME; ?>aluno";
+      });
+      </script>
+      <?php
+    else:
+      ?>
+      <script type="text/javascript">
+      bootbox.alert('Erro ao cadastrar aluno.', function(ex){
+
+      });
+      </script>
+      <?php
     endif;
+  endif;
 endif;
 ?>
 

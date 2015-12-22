@@ -7,25 +7,6 @@
     </p>
 
     <?php
-    $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-    if (isset($dados) && !empty($dados)):
-      if (isset($dados['editar'])):
-
-        $upescola = new ModelInstituicao();
-
-        $param = $dados['instituicao_id'];
-        unset($dados['search_form'], $dados['editar'], $dados['telefone'], $dados['instituicao_id']);
-
-        $upescola->ModelUpdate($param, $dados);
-        if ($upescola->getResult()):
-          ADSError('Dados atualizados com sucesso!!!', CRAZY_ACCEPT);
-        else:
-          ADSError('Erro ao atualizar, verifique e tente novamente!!', CRAZY_ALERT);
-        endif;
-      endif;
-    endif;
-
     $readescola = new Read();
 
     $stat = 'ativo';

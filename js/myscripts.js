@@ -14,7 +14,6 @@ function esconder(ele, local) {
   var texto = '';
   //var confirma = window.confirm("Deseja apagar esse registro?");
   bootbox.confirm('Deseja apagar esse registro?', function(resp){
-
     if(resp){
       $.ajax({
         url: './ajax/model' + local + '.ajax.php',
@@ -26,8 +25,9 @@ function esconder(ele, local) {
           texto = data;
         },
         complete: function(){
-          bootbox.alert(texto, function(){});
-          location.href = "http://localhost/schoolbus/" + local;
+          bootbox.alert(texto, function(){
+            location.href = "http://localhost/schoolbus/" + local;
+          });
         }
       });
     }

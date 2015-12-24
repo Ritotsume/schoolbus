@@ -21,4 +21,8 @@ aside.menu > a.btn-default{border: none; transition: .2s;}
 .btn-search{position: absolute; top: .5em; right: 1.3em; line-height: 0; padding: .3em .3em; border: none;}
 .btn-input-tel{position: absolute; top: 2.3em; right: 1.3em; line-height: 0; padding: .3em .3em; border: none;}
 
+.modal{overflow-y: scroll;}
 .modal-content{border-radius: 0}
+
+i[title='Editar'], i[title='Excluir']{cursor: pointer; transition: .2s;}
+i[title='Editar']:hover, i[title='Excluir']:hover{opacity: .7;}

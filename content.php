@@ -1,4 +1,4 @@
-<form action="" method="post">
+<form action="" method="post" id="frm-geral">
   <?php
   $page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
   $view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);

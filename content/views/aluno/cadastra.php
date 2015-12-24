@@ -1,66 +1,36 @@
-<?php
-$dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-if (isset($dados) && !empty($dados)):
-  if (isset($dados['cadastrar'])):
-    unset($dados['search_form'], $dados['telefone_numero'], $dados['cadastrar']);
-    $cadaluno = new ModelAluno();
-
-    $cadaluno->ModelCreator($dados);
-    if ($cadaluno->getRowCount()):
-      ?>
-      <script type="text/javascript">
-      bootbox.alert('Aluno cadastrado com sucesso!!', function(ex){
-        location.href = "<?= HOME; ?>aluno";
-      });
-      </script>
-      <?php
-    else:
-      ?>
-      <script type="text/javascript">
-      bootbox.alert('Erro ao cadastrar aluno.', function(ex){
-
-      });
-      </script>
-      <?php
-    endif;
-  endif;
-endif;
-?>
-
-<div class="row">
+<div class="row" data-cadastra="aluno">
   <div class="form-group col-md-6">
     <label for="aluno_nome" class="">Nome</label>
     <input type="text" class="form-control" name="aluno_nome" id="aluno_nome" placeholder="Francisco"
-    value="<?= isset($dados['aluno_nome']) ? $dados['aluno_nome'] : ''; ?>" />
+    value="<?= isset($dados['aluno_nome']) ? $dados['aluno_nome'] : ''; ?>" required="required" />
   </div>
   <div class="form-group col-md-6">
     <label for="aluno_sobrenome" class="">Sobrenome</label>
     <input type="text" class="form-control" name="aluno_sobrenome" id="aluno_sobrenome" placeholder="Silva Xavier"
-    value="<?= isset($dados['aluno_sobrenome']) ? $dados['aluno_sobrenome'] : ''; ?>" />
+    value="<?= isset($dados['aluno_sobrenome']) ? $dados['aluno_sobrenome'] : ''; ?>" required="required" />
   </div>
 </div>
 <div class="row">
   <div class="form-group col-md-4">
     <label for="aluno_cpf" class="">CPF</label>
     <input type="text" class="form-control" name="aluno_cpf" id="aluno_cpf" placeholder="123.456.789-00" required="required"
-    value="<?= isset($dados['aluno_cpf']) ? $dados['aluno_cpf'] : ''; ?>" />
+    value="<?= isset($dados['aluno_cpf']) ? $dados['aluno_cpf'] : ''; ?>" required="required" />
   </div>
   <div class="form-group col-md-4">
     <label for="aluno_nascimento" class="">Nascimento</label>
     <input type="text" class="form-control" name="aluno_nascimento" id="aluno_nascimento" placeholder="01/01/1991"
-    value="<?= isset($dados['aluno_nascimento']) ? $dados['aluno_nascimento'] : ''; ?>" />
+    value="<?= isset($dados['aluno_nascimento']) ? $dados['aluno_nascimento'] : ''; ?>" required="required" />
   </div>
   <div class="form-group col-md-4">
     <label for="aluno_serie" class="">Serie</label>
     <input type="text" class="form-control" name="aluno_serie" id="aluno_serie" placeholder="2A"
-    value="<?= isset($dados['aluno_serie']) ? $dados['aluno_serie'] : ''; ?>" />
+    value="<?= isset($dados['aluno_serie']) ? $dados['aluno_serie'] : ''; ?>" required="required" />
   </div>
 </div>
 <div class="row">
   <div class="form-group col-md-4">
     <label for="aluno_turno" class="">Turno</label>
-    <select class="form-control" name="aluno_turno" id="aluno_turno">
+    <select class="form-control" name="aluno_turno" id="aluno_turno" required="required">
       <option value="">Selecione...</option>
       <option value="Matutino" <?= (isset($dados['aluno_turno']) && $dados['aluno_turno'] == 'Matutino') ? 'selected="selected"' : ''; ?>>Matutino</option>
       <option value="Vespertino" <?= (isset($dados['aluno_turno']) && $dados['aluno_turno'] == 'Vespertino') ? 'selected="selected"' : ''; ?>>Vespertino</option>
@@ -69,7 +39,7 @@ endif;
   </div>
   <div class="form-group col-md-4">
     <label for="aluno_escolaridade" class="">Escolaridade</label>
-    <select class="form-control" name="aluno_escolaridade" id="aluno_escolaridade">
+    <select class="form-control" name="aluno_escolaridade" id="aluno_escolaridade" required="required">
       <option value="">Selecione...</option>
       <option value="Fundamental" <?= (isset($dados['aluno_escolaridade']) && $dados['aluno_escolaridade'] == 'Fundamental') ? 'selected="selected"' : ''; ?>>Fundamental</option>
       <option value="Médio" <?= (isset($dados['aluno_escolaridade']) && $dados['aluno_escolaridade'] == 'Médio') ? 'selected="selected"' : ''; ?>>Médio</option>
@@ -79,13 +49,13 @@ endif;
   <div class="form-group col-md-4">
     <label for="aluno_email" class="">Email</label>
     <input type="email" class="form-control" name="aluno_email" id="aluno_email" placeholder="teste@exemplo.com.br"
-    value="<?= isset($dados['aluno_email']) ? $dados['aluno_email'] : ''; ?>" />
+    value="<?= isset($dados['aluno_email']) ? $dados['aluno_email'] : ''; ?>" required="required" />
   </div>
 </div>
 <div class="row">
   <div class="form-group col-md-4">
     <label for="tb_logradouros_logradouro_id" class="">Endereço</label>
-    <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
+    <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id" required="required">
       <option value="">Selecione...</option>
       <?php
       $readerlog = new Read;
@@ -108,11 +78,11 @@ endif;
   <div class="form-group col-md-3">
     <label for="aluno_end_numero" class="">Número</label>
     <input type="text" class="form-control" name="aluno_end_numero" id="aluno_end_numero" placeholder="123"
-    value="<?= isset($dados['aluno_end_numero']) ? $dados['aluno_end_numero'] : ''; ?>" />
+    value="<?= isset($dados['aluno_end_numero']) ? $dados['aluno_end_numero'] : ''; ?>" required="required" />
   </div>
   <div class="form-group col-md-5">
     <label for="tb_rotas_rota_id" class="">Rota</label>
-    <select class="form-control" name="tb_rotas_rota_id" id="tb_rotas_rota_id">
+    <select class="form-control" name="tb_rotas_rota_id" id="tb_rotas_rota_id" required="required">
       <option value="">Selecione...</option>
       <?php
       $readerlog->Reader('tb_rotas', 'inner join tb_instituicoes on '

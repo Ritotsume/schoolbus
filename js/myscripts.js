@@ -7,12 +7,64 @@ $(document).ready(function () {
     //        alert($(this).text());
     //        $(".content-geral").fadeOut();
   });
+
+  $('button[data-cadastrar]').on('click', function(){
+    var local = $(this).attr('data-cadastrar');
+    var inputs = $('input');
+    var selects = $('select');
+    var data_dt = {};
+    var indice = null;
+    var valor = null;
+    var msgboot = null;
+    var msg_data = null;
+    $(inputs).each(function(index, el) {
+      indice = $(this).attr('name');
+      valor = $(this).val();
+      data_dt[indice] = valor;
+    });
+
+    $(selects).each(function(index, el) {
+      indice = $(this).attr('name');
+      valor = $(this).val();
+      data_dt[indice] = valor;
+    });
+
+    data_dt = JSON.stringify(data_dt);
+    var data_dois = {json:data_dt};
+
+    $.ajax({
+      url: '../ajax/model'+ local +'.ajax.php',
+      data: data_dois,
+      type: 'POST',
+      beforeSend: function(){
+        msgboot = bootbox.dialog({
+          title: '',
+          message: '<span><i class="fa fa-spin fa-fulse"></i> Gravando informações...</span>'
+        });
+      },
+      success: function(data){
+        msgboot.modal('hide');
+        msg_data = data;
+      },
+      complete: function(st){
+        bootbox.alert({
+          message: msg_data,
+          callback: function(ex){
+            bootbox.hideAll();
+            location.href = location.origin + '/schoolbus/' + local;
+          }
+        });
+      },
+      error: function(err){
+        bootbox.alert('erro: ');
+      }
+    });
+  });
 });
 
 function esconder(ele, local) {
   var keys = $(ele).find('span').attr('dataStr');
   var texto = '';
-  //var confirma = window.confirm("Deseja apagar esse registro?");
   bootbox.confirm('Deseja apagar esse registro?', function(resp){
     if(resp){
       $.ajax({

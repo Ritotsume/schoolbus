@@ -32,7 +32,7 @@
           <span class="col-md-2"><?= ucfirst($regs['aluno_status']); ?></span>
           <span class="col-md-2">
             <span class="col-md-6">
-              <i class="fa fa-edit text-primary text-primary" onclick="redireciona(this)" title="Editar">
+              <i class="fa fa-edit text-primary" onclick="redireciona(this)" title="Editar">
                 <span dataStr="<?= HOME . 'index.php?pag=aluno&view=update&var=atualizar&del=' . $id; ?>"></span>
               </i>
             </span>

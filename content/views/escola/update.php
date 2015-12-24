@@ -32,7 +32,7 @@ if (isset($param) && !empty($param)):
                 </div>
                 <div class="item">
                     <label for="" class="bold text-theme">Razão</label><br />
-                    <input type="text" name="instituicao_razao" placeholder="EMEF Água Salgada" 
+                    <input type="text" name="instituicao_razao" placeholder="EMEF Água Salgada"
                            value="<?= isset($dados['instituicao_razao']) ? $dados['instituicao_razao'] : $read->getResult()[0]['instituicao_razao']; ?>" />
                 </div>
             </div>
@@ -51,7 +51,7 @@ if (isset($param) && !empty($param)):
                 </div>
                 <div class="item-3">
                     <label for="" class="bold text-theme">CNPJ</label>
-                    <input type="text" name="instituicao_cnpj" placeholder="23.123.123/0001-00" 
+                    <input type="text" name="instituicao_cnpj" placeholder="23.123.123/0001-00"
                            value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : $read->getResult()[0]['instituicao_cnpj']; ?>" />
                 </div>
             </div>
@@ -81,14 +81,14 @@ if (isset($param) && !empty($param)):
                 </div>
                 <div class="item-3">
                     <label for="" class="bold text-theme">Número</label>
-                    <input type="text" name="instituicao_numero" placeholder="123" 
+                    <input type="text" name="instituicao_numero" placeholder="123"
                            value="<?= isset($dados['instituicao_numero']) ? $dados['instituicao_numero'] : $read->getResult()[0]['instituicao_numero']; ?>" />
                 </div>
             </div>
             <div class="line-half">
                 <div class="item">
                     <label for="" class="bold text-theme">Diretor</label>
-                    <input type="text" name="instituicao_diretor" placeholder="Juvenal Antena" 
+                    <input type="text" name="instituicao_diretor" placeholder="Juvenal Antena"
                            value="<?= isset($dados['instituicao_diretor']) ? $dados['instituicao_diretor'] : $read->getResult()[0]['instituicao_diretor']; ?>" />
                 </div>
             </div>

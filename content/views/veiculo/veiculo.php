@@ -1,66 +1,52 @@
 <div id="content-data-escola">
-    <div id="msg-escola"></div>
-
-    <a href="<?= HOME; ?>veiculo/cadastro" class="a-button"><i class="fa fa-plus-circle"></i> Adicionar</a><br />
-
+  <article class="itens-table">
+    <p class="row">
+      <a href="<?= HOME; ?>veiculo/cadastro" class="btn btn-default">
+        <i class="fa fa-plus-circle"></i> Adicionar
+      </a>
+    </p>
     <?php
-
-    $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-
-    if (isset($dados) && !empty($dados)):
-        if (isset($dados['editar'])):
-
-            $upveiculo = new ModelVeiculo();
-
-            $param = $dados['veiculo_placa'];
-            unset($dados['search_form'], $dados['editar'], $dados['veiculo_placa']);
-
-            $upveiculo->ModelUpdate($param, $dados);
-            if ($upveiculo->getResult()):
-                ADSError('Dados atualizados com sucesso!!!', CRAZY_ACCEPT);
-            else:
-                ADSError('Erro ao atualizar, verifique e tente novamente!!', CRAZY_ALERT);
-            endif;
-        endif;
-    endif;
-    
     $readveiculo = new Read();
 
     $stat = 'ativo';
     $readveiculo->Reader('tb_veiculos', 'where veiculo_status = :stat', "stat={$stat}");
 
     if ($readveiculo->getRowCount() > 0):
+      ?>
+      <div class="row text-uppercase bold active-default">
+        <span class="col-md-3">Placa</span>
+        <span class="col-md-4">Veículo</span>
+        <span class="col-md-2">Vagas</span>
+        <span class="col-md-2">Controles</span>
+      </div>
+      <?php
+      foreach ($readveiculo->getResult() as $regs):
+        if($regs['veiculo_poltronas'] - $regs['veiculo_vagas'] <= 0):
+          $vagas = 'Completo';
+        else:
+          $vagas =  ($regs['veiculo_poltronas'] - $regs['veiculo_vagas']) . ' vaga(s)';
+        endif;
         ?>
-        <div class="line-veiculo head">
-            <span>Placa</span>
-            <span>Veículo</span>
-            <span>Vagas</span>
-            <span>Controles</span>
+        <div class="row">
+          <span class="col-md-3"><?= $regs['veiculo_placa']; ?></span>
+          <span class="col-md-4"><?= $regs['veiculo_marca'] . ' - ' . $regs['veiculo_modelo']; ?></span>
+          <span class="col-md-2"><?= $vagas; ?></span>
+          <span class="col-md-2">
+            <span class="col-md-3">
+              <i class="fa fa-edit text-primary" onclick="redireciona(this)" title="Editar">
+                <span dataStr="<?= HOME . 'index.php?pag=veiculo&view=update&var=atualizar&del=' . $regs['veiculo_placa']; ?>"></span>
+              </i>
+            </span>
+            <span class="col-md-3">
+              <i class="fa fa-minus-circle text-danger" onclick="esconder(this, 'veiculo')" title="Excluir">
+                <span dataStr="<?= 'var=delete&del=' . $regs['veiculo_placa']; ?>"></span>
+              </i>
+            </span>
+          </span>
         </div>
         <?php
-        foreach ($readveiculo->getResult() as $regs):
-            if($regs['veiculo_poltronas'] - $regs['veiculo_vagas'] <= 0):
-                $vagas = 'Completo';
-            else:
-                $vagas =  ($regs['veiculo_poltronas'] - $regs['veiculo_vagas']) . ' vaga(s)';
-            endif;
-            ?>
-            <div class="line-veiculo">
-                <span><?= $regs['veiculo_placa']; ?></span>
-                <span><?= $regs['veiculo_marca'] . ' - ' . $regs['veiculo_modelo']; ?></span>
-                <span><?= $vagas; ?></span>
-                <span>
-                    <i class="fa fa-edit bt-i text-theme" onclick="redireciona(this)" title="Editar">
-                        <span dataStr="<?= HOME . 'index.php?pag=veiculo&view=update&var=atualizar&del=' . $regs['veiculo_placa']; ?>"></span>
-                    </i>
-                    <i class="fa fa-minus-circle bt-i text-theme" onclick="esconder(this, 'veiculo')" title="Excluir">
-                        <span dataStr="<?= 'var=delete&del=' . $regs['veiculo_placa']; ?>"></span>
-                    </i>
-                </span>
-            </div>
-            <?php
-        endforeach;
+      endforeach;
     endif;
     ?>
+  </article>
 </div>
-

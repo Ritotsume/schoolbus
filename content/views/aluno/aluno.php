@@ -31,12 +31,12 @@
           <span class="col-md-2"><?= $regs['bairros_nome']; ?></span>
           <span class="col-md-2"><?= ucfirst($regs['aluno_status']); ?></span>
           <span class="col-md-2">
-            <span class="col-md-6">
+            <span class="col-md-3">
               <i class="fa fa-edit text-primary" onclick="redireciona(this)" title="Editar">
                 <span dataStr="<?= HOME . 'index.php?pag=aluno&view=update&var=atualizar&del=' . $id; ?>"></span>
               </i>
             </span>
-            <span class="col-md-6">
+            <span class="col-md-3">
               <i class="fa fa-minus-circle text-danger" onclick="esconder(this, 'aluno')" title="Excluir">
                 <span dataStr="<?= 'var=delete&del=' . $id; ?>"></span>
               </i>

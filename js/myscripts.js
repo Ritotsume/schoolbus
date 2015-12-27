@@ -3,11 +3,6 @@
 */
 
 $(document).ready(function () {
-  $(".sidebar a").on('click', function () {
-    //        alert($(this).text());
-    //        $(".content-geral").fadeOut();
-  });
-
   $('button[data-cadastrar]').on('click', function(){
     var local = $(this).attr('data-cadastrar');
     var inputs = $('input');

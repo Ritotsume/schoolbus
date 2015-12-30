@@ -6,8 +6,8 @@
 
 .controls{margin-bottom: 1em;}
 
-aside.menu > a.btn{text-align: left; padding: .6em 1.2em; border-radius: 0; margin: .3em 0;}
-aside.menu > a.btn-default{border: none; transition: .2s;}
+aside.menu a.btn{text-align: left; padding: .6em 1.2em; border-radius: 0; margin: .3em 0;}
+aside.menu a.btn-default{border: none; transition: .2s;}
 
 .btn{border: .1em solid; border-radius: 0; transition: .2s;}
 

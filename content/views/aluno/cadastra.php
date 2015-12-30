@@ -86,7 +86,7 @@
       <option value="">Selecione...</option>
       <?php
       $readerlog->Reader('tb_rotas', 'inner join tb_instituicoes on '
-      . 'tb_rotas.tb_instiuicoes_instituicao_id = tb_instituicoes.instituicao_id '
+      . 'tb_rotas.tb_instituicoes_instituicao_id = tb_instituicoes.instituicao_id '
       . 'inner join tb_veiculos on tb_rotas.tb_veiculos_veiculo_placa = tb_veiculos.veiculo_placa '
       . 'inner join tb_logradouros on tb_rotas.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
       . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id');

@@ -17,6 +17,10 @@
     RewriteRule ^motorista/cadastro/?$ index.php?pag=motorista&view=cadastra [NC,L]
     RewriteRule ^motorista/delete/([0-9])/?$ index.php?pag=motorista&var=delete&del=$1 [NC,L]
 
+    RewriteRule ^rota/?$ index.php?pag=rota [NC,L]
+    RewriteRule ^rota/cadastro/?$ index.php?pag=rota&view=cadastra [NC,L]
+    RewriteRule ^rota/delete/([0-9])/?$ index.php?pag=rota&var=delete&del=$1 [NC,L]
+
     RewriteRule ^veiculo/?$ index.php?pag=veiculo [NC,L]
     RewriteRule ^veiculo/cadastro/?$ index.php?pag=veiculo&view=cadastra [NC,L]
     RewriteRule ^veiculo/delete/(.*)/?$ index.php?pag=veiculo&var=delete&del=$1 [NC,L]

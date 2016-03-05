@@ -1,36 +1,109 @@
-<?php
-$pageatual = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
-
-if(isset($pageatual) && !empty($pageatual) && $pageatual != 'home'):
-	$in = ' in';
-else:
-	$in = '';
-endif;
-?>
-
-<aside class="col-md-3 menu">
-	<div class="row area-search">
-		<div class="form-group col-md-12">
-			<input type="text" name="search_form" class="form-control" placeholder="Pesquisa interna" />
-			<button type="button" class="btn-search"><i class="fa fa-search"></i></button>
+<div class="side-menu sidebar-inverse">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="side-menu-container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+					<div class="icon fa fa-bus"></div>
+					<div class="title">SchoolBus</div>
+				</a>
+				<button type="button" class="navbar-expand-toggle pull-right visible-xs">
+					<i class="fa fa-times icon"></i>
+				</button>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="<?= HOME; ?>home">
+						<span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
+					</a>
+				</li>
+				<li class="panel panel-default dropdown">
+					<a data-toggle="collapse" href="#dropdown-entries">
+						<span class="icon fa fa-archive"></span><span class="title">Cadastros</span>
+					</a>
+					<!-- Dropdown level 1 -->
+					<div id="dropdown-entries" class="panel-collapse collapse">
+						<div class="panel-body">
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="<?= HOME; ?>aluno/cadastra"><span class="icon fa fa-group"></span> Alunos</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>escola/cadastra"><span class="icon fa fa-university"></span> Escolas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>motorista/cadastra"><span class="icon fa fa-user"></span> Motoristas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>rota/cadastra"><span class="icon fa fa-map-signs"></span> Rotas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>veiculo/cadastra"><span class="icon fa fa-bus"></span> Veículos</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="panel panel-default dropdown">
+					<a data-toggle="collapse" href="#dropdown-controls">
+						<span class="icon fa fa-tasks"></span><span class="title">Controle</span>
+					</a>
+					<!-- Dropdown level 1 -->
+					<div id="dropdown-controls" class="panel-collapse collapse">
+						<div class="panel-body">
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="<?= HOME; ?>aluno"><span class="icon fa fa-group"></span> Alunos</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>escola"><span class="icon fa fa-university"></span> Escolas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>motorista"><span class="icon fa fa-user"></span> Motoristas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>rota"><span class="icon fa fa-map-signs"></span> Rotas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>veiculo"><span class="icon fa fa-bus"></span> Veículos</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li class="panel panel-default dropdown">
+					<a data-toggle="collapse" href="#dropdown-graphs">
+						<span class="icon fa fa-area-chart"></span><span class="title">Gráficos</span>
+					</a>
+					<!-- Dropdown level 1 -->
+					<div id="dropdown-graphs" class="panel-collapse collapse">
+						<div class="panel-body">
+							<ul class="nav navbar-nav">
+								<li>
+									<a href="<?= HOME; ?>aluno"><span class="icon fa fa-group"></span> Alunos</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>escola"><span class="icon fa fa-university"></span> Escolas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>motorista"><span class="icon fa fa-user"></span> Motoristas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>rota"><span class="icon fa fa-map-signs"></span> Rotas</a>
+								</li>
+								<li>
+									<a href="<?= HOME; ?>veiculo"><span class="icon fa fa-bus"></span> Veículos</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li>
+					<a href="license.html">
+						<span class="icon fa fa-thumbs-o-up"></span><span class="title">License</span>
+					</a>
+				</li>
+			</ul>
 		</div>
-	</div>
-
-	<a href="<?= HOME; ?>home" class="btn btn-default btn-block <?= ($pageatual == 'home') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-home"></i> Home</a>
-
-	<a href="#colCadastro" class="btn btn-default btn-block" data-toggle="collapse"
-	data-parent="#accordion" aria-expanded="true" aria-controls="colCadastro">
-	<i class="fa fa-database"></i> Cadastros
-</a>
-
-<div id="colCadastro" class="panel-collapse collapse<?= $in; ?>" role="tabpanel" aria-labelledby="headingOne">
-	<a href="<?= HOME; ?>aluno" class="btn btn-default btn-block <?= ($pageatual == 'aluno') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-graduation-cap"></i> Cadastrar aluno</a>
-	<a href="<?= HOME; ?>escola" class="btn btn-default btn-block <?= ($pageatual == 'escola') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-university"></i> Cadastrar escola</a>
-	<a href="<?= HOME; ?>motorista" class="btn btn-default btn-block <?= ($pageatual == 'motorista') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-users"></i> Cadastrar motorista</a>
-	<a href="<?= HOME; ?>veiculo" class="btn btn-default btn-block <?= ($pageatual == 'veiculo') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-bus"></i> Cadastrar veículos</a>
-	<a href="<?= HOME; ?>rota" class="btn btn-default btn-block <?= ($pageatual == 'rota') ? 'bold active-default' : ''; ?>" role="button"><i class="fa fa-map-signs"></i> Cadastrar rotas</a>
+		<!-- /.navbar-collapse -->
+	</nav>
 </div>
-
-<a href="#relatorios" class="btn btn-default btn-block <?= ($pageatual == 'relatorios') ? 'bold active-default' : ''; ?>" role="button" onclick="modals('Teste modal', 'Apenas um teste. Nada demais...')"><i class="fa fa-bus"></i> Relatórios</a>
-<a href="#" class="btn btn-default btn-block" onclick="toggleTheme()" role="button"><i class="fa fa-bus"></i> Mudar tema</a>
-</aside>

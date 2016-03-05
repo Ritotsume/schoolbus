@@ -1,49 +1,65 @@
-<div id="content-data-escola">
-  <article class="itens-table">
-    <p class="row">
-      <a href="<?= HOME; ?>motorista/cadastro" class="btn btn-default">
-        <i class="fa fa-plus-circle"></i> Adicionar
-      </a>
-    </p>
-    <?php
-    $readmotorista = new Read();
-
-    $stat = 'ativo';
-    $readmotorista->Reader('tb_motoristas', 'inner join tb_logradouros on '
-    . 'tb_motoristas.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-    . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id'
-    . ' where motorista_status = :stat', "stat={$stat}");
-
-    if ($readmotorista->getRowCount() > 0):
-      ?>
-      <div class="row text-uppercase bold active-default">
-        <span class="col-md-6">Motorista</span>
-        <span class="col-md-4">Bairro</span>
-        <span class="col-md-2">Controles</span>
-      </div>
-      <?php
-      foreach ($readmotorista->getResult() as $regs):
-        $id = (int) $regs['motorista_id'];
-        ?>
-        <div class="row">
-          <span class="col-md-6"><?= $regs['motorista_nome'] . ' ' . $regs['motorista_sobrenome']; ?></span>
-          <span class="col-md-4"><?= $regs['bairros_nome']; ?></span>
-          <span class="col-md-2">
-            <span class="col-md-3">
-              <i class="fa fa-edit text-primary" onclick="redireciona(this)" title="Editar">
-                <span dataStr="<?= HOME . 'index.php?pag=motorista&view=update&var=atualizar&del=' . $id; ?>"></span>
-              </i>
-            </span>
-            <span class="col-md-3">
-              <i class="fa fa-minus-circle text-danger" onclick="esconder(this, 'motorista')" title="Excluir">
-                <span dataStr="<?= 'var=delete&del=' . $id; ?>"></span>
-              </i>
-            </span>
-          </span>
+<div class="side-body">
+  <div class="page-title">
+    <span class="title">Relatório de Motoristas</span>
+    <div class="description">Relatório de motoristas cadastrados no sistema.</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="title">Dados gerais</div>
+          </div>
         </div>
-        <?php
-      endforeach;
-    endif;
-    ?>
-  </article>
+        <div class="card-body">
+          <?php
+          $readmotorista = new Read();
+
+          $stat = 'ativo';
+          $readmotorista->Reader('tb_motoristas', 'inner join tb_logradouros on '
+          . 'tb_motoristas.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
+          . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id'
+          . ' where motorista_status = :stat', "stat={$stat}");
+
+          if ($readmotorista->getRowCount() > 0):
+            ?>
+            <table class="datatable table table-striped" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Motorista</th>
+                  <th>Bairro</th>
+                  <th>Controles</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Motorista</th>
+                  <th>Bairro</th>
+                  <th>Controles</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <?php
+                foreach ($readmotorista->getResult() as $regs):
+                  $id = (int) $regs['motorista_id'];
+                  ?>
+                  <tr>
+                    <td><?= $regs['motorista_nome'] . ' ' . $regs['motorista_sobrenome']; ?></td>
+                    <td><?= $regs['bairros_nome']; ?></td>
+                    <td>
+                      <a href="<?= HOME; ?>motorista/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
+                      <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
+                        data-local="motorista" title="Excluir"><i class="fa fa-minus-circle"></i></button>
+                    </td>
+                  </tr>
+                  <?php
+                endforeach;
+              endif;
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

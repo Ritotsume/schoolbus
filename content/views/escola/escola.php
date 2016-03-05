@@ -1,50 +1,65 @@
-<div id="content-data-escola">
-  <article class="itens-table">
-    <p class="row">
-      <a href="<?= HOME; ?>escola/cadastro" class="btn btn-default">
-        <i class="fa fa-plus-circle"></i> Adicionar
-      </a>
-    </p>
-
-    <?php
-    $readescola = new Read();
-
-    $stat = 'ativo';
-    $readescola->Reader('tb_instituicoes', 'inner join tb_logradouros on '
-    . 'tb_instituicoes.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-    . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id'
-    . ' where instituicao_status = :stat', "stat={$stat}");
-
-    if ($readescola->getRowCount() > 0):
-      ?>
-      <div class="row text-uppercase bold active-default">
-        <span class="col-md-6">Instituição</span>
-        <span class="col-md-4">Bairro</span>
-        <span class="col-md-2">Controles</span>
-      </div>
-      <?php
-      foreach ($readescola->getResult() as $regs):
-        $id = (int) $regs['instituicao_id'];
-        ?>
-        <div class="row">
-          <span class="col-md-6"><?= $regs['instituicao_nome']; ?></span>
-          <span class="col-md-4"><?= $regs['bairros_nome']; ?></span>
-          <span class="col-md-2">
-            <span class="col-md-3">
-              <i class="fa fa-edit text-primary" onclick="redireciona(this)" title="Editar">
-                <span dataStr="<?= HOME . 'index.php?pag=escola&view=update&var=atualizar&del=' . $id; ?>"></span>
-              </i>
-            </span>
-            <span class="col-md-3">
-              <i class="fa fa-minus-circle text-danger" onclick="esconder(this, 'escola')" title="Excluir">
-                <span dataStr="<?= 'var=delete&del=' . $id; ?>"></span>
-              </i>
-            </span>
-          </span>
+<div class="side-body">
+  <div class="page-title">
+    <span class="title">Relatório de Escolas</span>
+    <div class="description">Relatório de escolas cadastradas no sistema.</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="title">Dados gerais</div>
+          </div>
         </div>
-        <?php
-      endforeach;
-    endif;
-    ?>
-  </article>
-</div>
+        <div class="card-body">
+          <?php
+          $readescola = new Read();
+
+          $stat = 'ativo';
+          $readescola->Reader('tb_instituicoes', 'inner join tb_logradouros on '
+          . 'tb_instituicoes.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
+          . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id'
+          . ' where instituicao_status = :stat', "stat={$stat}");
+
+          if ($readescola->getRowCount() > 0):
+            ?>
+            <table class="datatable table table-striped" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Instituição</th>
+                  <th>Bairro</th>
+                  <th>Controles</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Instituição</th>
+                  <th>Bairro</th>
+                  <th>Controles</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <?php
+                foreach ($readescola->getResult() as $regs):
+                  $id = (int) $regs['instituicao_id'];
+                  ?>
+                  <tr>
+                    <td><?= $regs['instituicao_nome']; ?></td>
+                    <td><?= $regs['bairros_nome']; ?></td>
+                    <td>
+                      <a href="<?= HOME; ?>escola/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
+                      <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
+                        data-local="escola" title="Excluir"><i class="fa fa-minus-circle"></i></button>
+                      </td>
+                    </tr>
+                    <?php
+                  endforeach;
+                endif;
+                ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

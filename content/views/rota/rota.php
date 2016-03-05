@@ -1,48 +1,65 @@
-<div id="content-data-escola">
-  <article class="itens-table">
-    <p class="row">
-      <a href="<?= HOME; ?>rota/cadastro" class="btn btn-default">
-        <i class="fa fa-plus-circle"></i> Adicionar
-      </a>
-    </p>
-    <?php
-    $readrota = new ModelRotas;
-
-    $stat = 1;
-    $readrota->getRotas($stat);
-
-    if ($readrota->getRowCount() > 0):
-      ?>
-      <div class="row text-uppercase bold active-default">
-        <span class="col-md-4">Escola</span>
-        <span class="col-md-4">Bairro</span>
-        <span class="col-md-2">Veículo/Placa</span>
-        <span class="col-md-2">Controles</span>
-      </div>
-      <?php
-      foreach ($readrota->getResult() as $regs):
-        $id = (int) $regs['rota_id'];
-        ?>
-        <div class="row">
-          <span class="col-md-4"><?= $regs['instituicao_nome']; ?></span>
-          <span class="col-md-4"><?= $regs['bairros_nome']; ?></span>
-          <span class="col-md-2"><?= $regs['veiculo_placa']; ?></span>
-          <span class="col-md-2">
-            <span class="col-md-3">
-              <i class="fa fa-edit text-primary" onclick="redireciona(this)" title="Editar">
-                <span dataStr="<?= HOME . 'index.php?pag=rota&view=update&var=atualizar&del=' . $id; ?>"></span>
-              </i>
-            </span>
-            <span class="col-md-3">
-              <i class="fa fa-minus-circle text-danger" onclick="esconder(this, 'rota')" title="Excluir">
-                <span dataStr="<?= 'var=delete&del=' . $id; ?>"></span>
-              </i>
-            </span>
-          </span>
+<div class="side-body">
+  <div class="page-title">
+    <span class="title">Relatório de Rotas</span>
+    <div class="description">Relatório de rotas cadastradas no sistema.</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="title">Dados gerais</div>
+          </div>
         </div>
-        <?php
-      endforeach;
-    endif;
-    ?>
-  </article>
+        <div class="card-body">
+          <?php
+          $readrota = new ModelRotas;
+
+          $stat = 1;
+          $readrota->getRotas($stat);
+
+          if ($readrota->getRowCount() > 0):
+            ?>
+            <table class="datatable table table-striped" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Escola</th>
+                  <th>Bairro</th>
+                  <th>Veículo/Placa</th>
+                  <th>Controles</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Escola</th>
+                  <th>Bairro</th>
+                  <th>Veículo/Placa</th>
+                  <th>Controles</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <?php
+                foreach ($readrota->getResult() as $regs):
+                  $id = (int) $regs['rota_id'];
+                  ?>
+                  <tr>
+                    <td><?= $regs['instituicao_nome']; ?></td>
+                    <td><?= $regs['bairros_nome']; ?></td>
+                    <td><?= $regs['veiculo_placa']; ?></td>
+                    <td>
+                      <a href="<?= HOME; ?>rota/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
+                      <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
+                        data-local="rota" title="Excluir"><i class="fa fa-minus-circle"></i></button>
+                    </td>
+                  </tr>
+                  <?php
+                endforeach;
+              endif;
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

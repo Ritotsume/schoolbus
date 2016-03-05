@@ -1,16 +1,14 @@
-<form action="" method="post" id="frm-geral">
-  <?php
-  $page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
-  $view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
-  $erros = array('401', '403', '404', '500');
-  //
-  //    if (isset($page) && $page != 'home'):
-  //        include_once './controls.php';
-  //    endif;
+<?php
+$page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
+$view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
+$erros = array('401', '403', '404', '500');
+?>
 
-  include_once './controls.php';
-  ?>
-  <div class="col-md-9">
+<div class="container-fluid">
+  <form action="" method="post" class="form-horizontal" id="frm-geral">
+
+    <!-- <div class="side-body padding-top">
+    <div class="row"> -->
     <?php
     if (!in_array($page, $erros)):
       if (isset($page) && !empty($page)):
@@ -28,13 +26,8 @@
         include_once './errors' . DIRECTORY_SEPARATOR . $page . '.php';
       endif;
       ?>
-    </form>
-  </div>
-  <script type="text/javascript" src="<?= HOME; ?>js/jquery.js"></script>
-  <script type="text/javascript" src="<?= HOME; ?>js/bootstrap.js"></script>
-  <script type="text/javascript" src="<?= HOME; ?>js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="<?= HOME; ?>js/npm.js"></script>
-  <script type="text/javascript" src="<?= HOME; ?>js/bootbox.js"></script>
-  <script type="text/javascript" src="<?= HOME; ?>js/myscripts.js"></script>
-</body>
-</html>
+      <!-- </div>
+    </div> -->
+
+  </form>
+</div><!-- end container-fluid -->

@@ -1,1 +1,0 @@
-<footer class="footer-geral theme">&copy; ADS Crazy. Todos os direitos reservados.</footer>

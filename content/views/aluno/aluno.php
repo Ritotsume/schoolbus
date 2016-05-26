@@ -13,12 +13,9 @@
         </div>
         <div class="card-body">
           <?php
-          $readaluno = new Read();
+          $readaluno = new ModelAluno();
 
-          $readaluno->Reader('tb_aluno', 'inner join tb_logradouros on '
-          . 'tb_aluno.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-          . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id'
-          . ' order by aluno_status asc');
+          $readaluno->getAlunos(1);
 
           if ($readaluno->getRowCount() > 0):
             ?>
@@ -47,7 +44,7 @@
                   <tr>
                     <td><?= $regs['aluno_nome'] . ' ' . $regs['aluno_sobrenome']; ?></td>
                     <td><?= $regs['bairros_nome']; ?></td>
-                    <td><?= ucfirst($regs['aluno_status']); ?></td>
+                    <td><?= $regs['aluno_status'] ? '<span class="label label-success">Ativo</span>' : '<span class="label label-danger">Inativo</span>'; ?></td>
                     <td>
                       <a href="<?= HOME; ?>aluno/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
                       <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"

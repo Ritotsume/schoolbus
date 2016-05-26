@@ -3,6 +3,13 @@
 */
 
 $(document).ready(function () {
+
+  $('.datatable').DataTable({
+    "language": {
+            "url": "./lib/js/dt-table-pt-br.json"
+        }
+  });
+
   $('button[data-cadastrar]').on('click', function(){
     var local = $(this).attr('data-cadastrar');
     var inputs = $('input');
@@ -149,3 +156,27 @@ function toggleTheme()
     location.reload();
   }
 }
+
+var appendLogradouros = function()
+{
+  $('.add-logradouros').on('click', function(){
+    var selectText = $('#tb_logradouros_logradouro_id > option:selected').text();
+    var selectValue = $('#tb_logradouros_logradouro_id').val();
+    var textareaValue = $('#ref').val();
+
+    // $('#list-group-logradouros').append("<div class='alert alert-success alert-dismissible' role='alert'>"+
+    // "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+
+    // "<h4><strong><span class='fa fa-map-signs'></span></strong> "+ selectText +"</h4>"+
+    // "<p>"+ textareaValue +"</p>"+
+    // "<input type=\"hidden\" name=\"caminhos[]\" value='"+ selectValue +"' /></div>");
+
+    $('#list-group-logradouros').append('<a href="#" class="list-group-item list-group-item-success" role="alert">'+
+    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+    '<h4 class="list-group-item-heading"><i class="fa fa-map-signs"></i> '+ selectText +'</h4>'+
+    '<p class="list-group-item-text">'+ textareaValue +'</p>'+
+    '<input type="hidden" name="caminhos[]" value="'+ selectValue +'" />'+
+    '<input type="hidden" name="observacoes[]" value="'+ textareaValue +'" /></a>');
+    // console.log(selectText);
+  });
+}
+appendLogradouros();

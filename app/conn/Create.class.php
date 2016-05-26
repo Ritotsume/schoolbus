@@ -33,9 +33,9 @@ class Create extends Conn {
     }
 
     /**
-     * PRIVATE METHODS - Métodos privados para uso interno da classe
-     * 
-     */
+    * PRIVATE METHODS - Métodos privados para uso interno da classe
+    *
+    */
     private function getCon() {
         $this->connection = parent::getConnection();
         $this->create = $this->connection->prepare($this->create);
@@ -45,11 +45,7 @@ class Create extends Conn {
         $this->getCon();
         try {
             $this->create->execute($this->data);
-            if ($this->connection->lastInsertId()):
-                $this->result = $this->connection->lastInsertId();
-            else:
-                $this->result = true;
-            endif;
+            $this->result = true;
         } catch (PDOException $ex) {
             $this->result = [$ex->getMessage(), $ex->getCode()];
         }

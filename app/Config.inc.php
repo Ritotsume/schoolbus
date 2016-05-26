@@ -4,7 +4,7 @@ define('HOME', 'http://localhost/schoolbus/');
 
 // AUTOLOAD DE CLASSES ######################
 function __autoload($Class) {
-    $cDir = ['conn', 'models'];
+    $cDir = ['conn', 'models', 'helpers'];
     $iDir = null;
 
     foreach ($cDir as $dirName):

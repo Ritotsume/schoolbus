@@ -6,17 +6,29 @@
   if(isset($dados) && !empty($dados)):
     $cadastra = new ModelMotorista();
     unset($dados['search_form'], $dados['telefone']);
-    $cadastra->ModelCreator($dados);
-    if($cadastra->getRowCount() > 0):
-      echo  "<div class='alert alert-success alert-dismissible' role='alert'>
+
+    $request = md5(implode($dados));
+
+    if(isset($_SESSION['last_request']) && $_SESSION['last_request']== $request):
+      echo "<div class='alert alert-warning alert-dismissible' role='alert'>
       <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-      <strong><span class='fa fa-check-circle'></span></strong> Motorista <b>{$dados['motorista_nome']}</b> cadastrado(a) com sucesso.
+      <strong><span class='fa fa-warning'></span></strong> Motorista <b>{$dados['motorista_nome']}</b> já está cadastrado(a).
+      <a href='". HOME ."motorista'><span class='label label-warning'>Confira!</span></a>
       </div>";
     else:
-      echo  "<div class='alert alert-warning alert-dismissible' role='alert'>
-      <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-      <strong><span class='fa fa-exclamation-circle'></span></strong> Erro ao cadastrar aluno. Verifique e tente novamente.
-      </div>";
+      $_SESSION['last_request']  = $request;
+      $cadastra->ModelCreator($dados);
+      if($cadastra->getRowCount() > 0):
+        echo  "<div class='alert alert-success alert-dismissible' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong><span class='fa fa-check-circle'></span></strong> Motorista <b>{$dados['motorista_nome']}</b> cadastrado(a) com sucesso.
+        </div>";
+      else:
+        echo  "<div class='alert alert-warning alert-dismissible' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong><span class='fa fa-exclamation-circle'></span></strong> Erro ao cadastrar aluno. Verifique e tente novamente.
+        </div>";
+      endif;
     endif;
   endif;
   ?>
@@ -35,40 +47,40 @@
     <div class="card-body">
 
       <div class="form-group">
-        <label for="motorista_nome" class="col-xs-3 control-label">Nome</label>
-        <div class="col-xs-5">
+        <label for="motorista_nome" class="col-md-3 control-label">Nome</label>
+        <div class="col-md-5">
           <input type="text" name="motorista_nome" id="motorista_nome" placeholder="Joaquim"
           class="form-control" value="<?= isset($dados['motorista_nome']) ? $dados['motorista_nome'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="motorista_sobrenome" class="col-xs-3 control-label">Sobrenome</label>
-        <div class="col-xs-5">
+        <label for="motorista_sobrenome" class="col-md-3 control-label">Sobrenome</label>
+        <div class="col-md-5">
           <input type="text" name="motorista_sobrenome" id="motorista_sobrenome" placeholder="Silva Xavier"
           class="form-control" value="<?= isset($dados['motorista_sobrenome']) ? $dados['motorista_sobrenome'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for=motorista_rg"" class="col-xs-3 control-label">RG</label>
-        <div class="col-xs-3">
+        <label for=motorista_rg"" class="col-md-3 control-label">RG</label>
+        <div class="col-md-3">
           <input type="text" name="motorista_rg" id="motorista_rg" placeholder="12345"
           class="form-control" value="<?= isset($dados['motorista_rg']) ? $dados['motorista_rg'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="motorista_cpf" class="col-xs-3 control-label">CPF</label>
-        <div class="col-xs-3">
+        <label for="motorista_cpf" class="col-md-3 control-label">CPF</label>
+        <div class="col-md-3">
           <input type="number" name="motorista_cpf" id="motorista_cpf" placeholder="123.456.789-00"
           class="form-control" value="<?= isset($dados['motorista_cpf']) ? $dados['motorista_cpf'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="tb_logradouros_logradouro_id" class="col-xs-3 control-label">Endereço</label>
-        <div class="col-xs-4">
+        <label for="tb_logradouros_logradouro_id" class="col-md-3 control-label">Endereço</label>
+        <div class="col-md-4">
           <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
             <option value="">Selecione...</option>
             <?php
@@ -92,8 +104,8 @@
       </div>
 
       <div class="form-group">
-        <label for="" class="col-xs-3 control-label"></label>
-        <div class="col-xs-3">
+        <label for="" class="col-md-3 control-label"></label>
+        <div class="col-md-3">
           <button type="submit" class="btn btn-success btn-block"><i class="fa fa-download"></i> Gravar</button>
         </div>
       </div>

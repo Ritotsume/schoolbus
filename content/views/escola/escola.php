@@ -13,13 +13,8 @@
         </div>
         <div class="card-body">
           <?php
-          $readescola = new Read();
-
-          $stat = 'ativo';
-          $readescola->Reader('tb_instituicoes', 'inner join tb_logradouros on '
-          . 'tb_instituicoes.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-          . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id'
-          . ' where instituicao_status = :stat', "stat={$stat}");
+          $readescola = new ModelInstituicao();
+          $readescola->getInstituicoes();
 
           if ($readescola->getRowCount() > 0):
             ?>
@@ -28,6 +23,7 @@
                 <tr>
                   <th>Instituição</th>
                   <th>Bairro</th>
+                  <th>Status</th>
                   <th>Controles</th>
                 </tr>
               </thead>
@@ -35,6 +31,7 @@
                 <tr>
                   <th>Instituição</th>
                   <th>Bairro</th>
+                  <th>Status</th>
                   <th>Controles</th>
                 </tr>
               </tfoot>
@@ -46,6 +43,7 @@
                   <tr>
                     <td><?= $regs['instituicao_nome']; ?></td>
                     <td><?= $regs['bairros_nome']; ?></td>
+                    <td><?= $regs['instituicao_status'] ? '<span class="label label-success">Ativa</span>' : '<span class="label label-danger">Inativa</span>'; ?></td>
                     <td>
                       <a href="<?= HOME; ?>escola/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
                       <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"

@@ -19,7 +19,8 @@ class ModelVeiculo {
             $this->result = $create->getResult();
             $this->rowcount = $create->getRowCount();
         else:
-            $this->result = false;
+            $this->result = $create->getResult();
+            $this->rowcount = 0;
         endif;
     }
 
@@ -30,6 +31,8 @@ class ModelVeiculo {
         $delete->Deleter(self::Entity, 'where veiculo_placa = :placa', "placa={$this->veiculo}");
         if ($delete->getResult()):
             $this->result = true;
+        else:
+            $this->result = false;
         endif;
     }
 
@@ -43,6 +46,31 @@ class ModelVeiculo {
             $this->result = true;
         else:
             $this->result = false;
+        endif;
+    }
+
+    public function getVeiculos($status = null)
+    {
+        $read = new Read;
+
+        if(is_null($status)):
+            $read->Reader(self::Entity);
+            if($read->getResult()):
+                $this->result = $read->getResult();
+                $this->rowcount = $read->getRowCount();
+            else:
+                $this->result = false;
+                $this->rowcount = 0;
+            endif;
+        else:
+            $read->Reader(self::Entity, 'where veiculo_status = :status', "status={$status}");
+            if($read->getResult()):
+                $this->result = $read->getResult();
+                $this->rowcount = $read->getRowCount();
+            else:
+                $this->result = false;
+                $this->rowcount = 0;
+            endif;
         endif;
     }
 

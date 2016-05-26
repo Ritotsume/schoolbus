@@ -13,13 +13,8 @@
         </div>
         <div class="card-body">
           <?php
-          $readmotorista = new Read();
-
-          $stat = 'ativo';
-          $readmotorista->Reader('tb_motoristas', 'inner join tb_logradouros on '
-          . 'tb_motoristas.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-          . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id'
-          . ' where motorista_status = :stat', "stat={$stat}");
+          $readmotorista = new ModelMotorista();
+          $readmotorista->getMotoristas(1);
 
           if ($readmotorista->getRowCount() > 0):
             ?>
@@ -28,6 +23,7 @@
                 <tr>
                   <th>Motorista</th>
                   <th>Bairro</th>
+                  <th>Status</th>
                   <th>Controles</th>
                 </tr>
               </thead>
@@ -35,6 +31,7 @@
                 <tr>
                   <th>Motorista</th>
                   <th>Bairro</th>
+                  <th>Status</th>
                   <th>Controles</th>
                 </tr>
               </tfoot>
@@ -46,6 +43,7 @@
                   <tr>
                     <td><?= $regs['motorista_nome'] . ' ' . $regs['motorista_sobrenome']; ?></td>
                     <td><?= $regs['bairros_nome']; ?></td>
+                    <td><?= $regs['motorista_status'] ? '<span class="label label-success">Ativo</span>' : '<span class="label label-danger">Inativo</span>'; ?></td>
                     <td>
                       <a href="<?= HOME; ?>motorista/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
                       <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"

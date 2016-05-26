@@ -5,17 +5,30 @@
   if(isset($dados) && !empty($dados)):
     $cadastra = new ModelInstituicao();
     unset($dados['search_form'], $dados['telefone']);
-    $cadastra->ModelCreator($dados);
-    if($cadastra->getRowCount() > 0):
-      echo  "<div class='alert alert-success alert-dismissible' role='alert'>
+
+    $request = md5(implode($dados));
+
+    if(isset($_SESSION['last_request']) && $_SESSION['last_request']== $request):
+      echo "<div class='alert alert-warning alert-dismissible' role='alert'>
       <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-      <strong><span class='fa fa-check-circle'></span></strong> Escola <b>{$dados['instituicao_nome']}</b> cadastrada com sucesso.
+      <strong><span class='fa fa-warning'></span></strong> A escola <b>{$dados['instituicao_nome']}</b> já está cadastrada.
+      <a href='". HOME ."escola'><span class='label label-warning'>Confira!</span></a>
       </div>";
     else:
-      echo  "<div class='alert alert-warning alert-dismissible' role='alert'>
-      <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-      <strong><span class='fa fa-exclamation-circle'></span></strong> Erro ao cadastrar aluno. Verifique e tente novamente.
-      </div>";
+      $_SESSION['last_request']  = $request;
+      $cadastra->ModelCreator($dados);
+      if($cadastra->getRowCount() > 0):
+        echo  "<div class='alert alert-success alert-dismissible' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong><span class='fa fa-check-circle'></span></strong> Escola <b>{$dados['instituicao_nome']}</b> cadastrada com sucesso.
+        </div>";
+      else:
+        echo  "<div class='alert alert-warning alert-dismissible' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+        <strong><span class='fa fa-exclamation-circle'></span></strong> Erro ao cadastrar escola <b>{$dados['instituicao_nome']}</b>. Verifique e tente novamente.
+        </div>";
+        var_dump($cadastra->getResult());
+      endif;
     endif;
   endif;
   ?>
@@ -34,26 +47,26 @@
     <div class="card-body">
 
       <div class="form-group">
-        <label for="instituicao_nome" class="col-xs-3 control-label">Nome</label>
-        <div class="col-xs-5">
+        <label for="instituicao_nome" class="col-md-3 control-label">Nome</label>
+        <div class="col-md-5">
           <input type="text" class="form-control" name="instituicao_nome" id="instituicao_nome" placeholder="EMEF Água Salgada"
           value="<?= isset($dados['instituicao_nome']) ? $dados['instituicao_nome'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="instituicao_razao" class="col-xs-3 control-label">Razão</label>
-        <div class="col-xs-5">
+        <label for="instituicao_razao" class="col-md-3 control-label">Razão</label>
+        <div class="col-md-5">
           <input type="text" class="form-control" name="instituicao_razao" id="instituicao_razao" placeholder="EMEF Água Salgada"
           value="<?= isset($dados['instituicao_razao']) ? $dados['instituicao_razao'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group has-feedback">
-        <label for="telefone" class="col-xs-3 control-label">Telefone</label>
-        <div class="col-xs-3">
+        <label for="telefone" class="col-md-3 control-label">Telefone</label>
+        <div class="col-md-3">
           <div class="input-group">
-            <input type="number" class="form-control" name="telefone" id="telefone"
+            <input type="tel" class="form-control" name="telefone" id="telefone"
             placeholder="(27)3333-3333" />
             <span class="input-group-addon"><i class="fa fa-plus-circle"></i></span>
           </div>
@@ -62,24 +75,24 @@
       </div>
 
       <div class="form-group">
-        <label for="instituicao_email" class="col-xs-3 control-label">Email</label>
-        <div class="col-xs-5">
+        <label for="instituicao_email" class="col-md-3 control-label">Email</label>
+        <div class="col-md-5">
           <input type="email" class="form-control" name="instituicao_email" id="instituicao_email" placeholder="teste@exemplo.com.br"
           value="<?= isset($dados['instituicao_email']) ? $dados['instituicao_email'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="instituicao_cnpj" class="col-xs-3 control-label">CNPJ</label>
-        <div class="col-xs-3">
+        <label for="instituicao_cnpj" class="col-md-3 control-label">CNPJ</label>
+        <div class="col-md-3">
           <input type="number" class="form-control" name="instituicao_cnpj" id="instituicao_cnpj" placeholder="23.123.123/0001-00"
           value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="tb_logradouros_logradouro_id" class="col-xs-3 control-label">Endereço</label>
-        <div class="col-xs-4">
+        <label for="tb_logradouros_logradouro_id" class="col-md-3 control-label">Endereço</label>
+        <div class="col-md-4">
           <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
             <option value="">Selecione...</option>
             <?php
@@ -103,31 +116,31 @@
       </div>
 
       <div class="form-group">
-        <label for="instituicao_numero" class="col-xs-3 control-label">Número</label>
-        <div class="col-xs-2">
+        <label for="instituicao_numero" class="col-md-3 control-label">Número</label>
+        <div class="col-md-2">
           <input type="number" class="form-control" name="instituicao_numero" id="instituicao_numero" placeholder="123"
           value="<?= isset($dados['instituicao_numero']) ? $dados['instituicao_numero'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="instituicao_diretor" class="col-xs-3 control-label">Diretor</label>
-        <div class="col-xs-5">
+        <label for="instituicao_diretor" class="col-md-3 control-label">Diretor</label>
+        <div class="col-md-5">
           <input type="text" class="form-control" name="instituicao_diretor" id="instituicao_diretor" placeholder="Juvenal Antena"
           value="<?= isset($dados['instituicao_diretor']) ? $dados['instituicao_diretor'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="" class="col-xs-3 control-label">Telefones</label>
-        <div class="col-xs-3">
+        <label for="" class="col-md-3 control-label">Telefones</label>
+        <div class="col-md-3">
           <div id="telefones" class=""></div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="" class="col-xs-3 control-label"></label>
-        <div class="col-xs-3">
+        <label for="" class="col-md-3 control-label"></label>
+        <div class="col-md-3">
           <button type="submit" class="btn btn-success btn-block"><i class="fa fa-download"></i> Gravar</button>
         </div>
       </div>

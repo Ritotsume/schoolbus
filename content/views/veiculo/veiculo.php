@@ -40,7 +40,7 @@
               <tbody>
                 <?php
                 foreach ($readveiculo->getResult() as $regs):
-                  $id = $regs['veiculo_placa'];
+                  $id = $regs['veiculo_id'];
                   if(($regs['veiculo_poltronas'] - $regs['veiculo_vagas']) <= 0):
                     $vagas = 'Completo';
                   else:

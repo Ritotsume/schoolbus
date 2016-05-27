@@ -24,11 +24,11 @@ class ModelVeiculo {
         endif;
     }
 
-    public function ModelDelete($placa) {
-        $this->veiculo = $placa;
+    public function ModelDelete($idveiculo) {
+        $this->veiculo = $idveiculo;
 
         $delete = new Delete();
-        $delete->Deleter(self::Entity, 'where veiculo_placa = :placa', "placa={$this->veiculo}");
+        $delete->Deleter(self::Entity, 'where veiculo_id = :id', "id={$this->veiculo}");
         if ($delete->getResult()):
             $this->result = true;
         else:

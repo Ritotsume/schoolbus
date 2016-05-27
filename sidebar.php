@@ -11,11 +11,13 @@
 				</button>
 			</div>
 			<ul class="nav navbar-nav">
+				
 				<li class="<?= (isset($page) && $page == 'home') ? 'active' : ''; ?>">
 					<a href="<?= HOME; ?>home">
 						<span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
 					</a>
 				</li>
+
 				<li class="panel panel-default dropdown
 				<?= (isset($view) && $view == 'cadastra') ? 'active' : ''; ?>">
 					<a data-toggle="collapse" href="#dropdown-entries">
@@ -44,6 +46,7 @@
 						</div>
 					</div>
 				</li>
+
 				<li class="panel panel-default dropdown
 				<?= (isset($page) && !empty($page) && $view != 'cadastra' && $page != 'home') ? 'active' : ''; ?>">
 					<a data-toggle="collapse" href="#dropdown-controls">
@@ -72,6 +75,7 @@
 						</div>
 					</div>
 				</li>
+
 				<li class="panel panel-default dropdown">
 					<a data-toggle="collapse" href="#dropdown-graphs">
 						<span class="icon fa fa-area-chart"></span><span class="title">Gráficos</span>
@@ -99,11 +103,13 @@
 						</div>
 					</div>
 				</li>
+
 				<li>
 					<a href="license.html">
 						<span class="icon fa fa-thumbs-o-up"></span><span class="title">License</span>
 					</a>
 				</li>
+
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

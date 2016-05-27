@@ -25,7 +25,7 @@ class Delete extends Conn {
 
     /**
      * PRIVATE METHODS = Métodos privados para uso interno da classe
-     * 
+     *
      */
     private function getCon() {
         $this->connection = parent::getConnection();

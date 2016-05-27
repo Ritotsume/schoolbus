@@ -64,7 +64,7 @@ $(document).ready(function () {
   });
 });
 
-var deleteReg = function esconder() {
+var deleteReg = function() {
   jQuery('.delete-reg').on('click', function(){
     var keys = $(this).attr('dataStr');
     var local = $(this).attr('data-local');

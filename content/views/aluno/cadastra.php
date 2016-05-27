@@ -79,6 +79,28 @@
       </div>
 
       <div class="form-group">
+        <label for="tb_instituicoes_instituicao_id" class="col-md-3 control-label">Escola</label>
+        <div class="col-md-4">
+          <select class="form-control" name="tb_instituicoes_instituicao_id" id="tb_instituicoes_instituicao_id" required="required">
+            <option value="">Selecione...</option>
+            <?php
+            $instituicoes = new ModelInstituicao();
+            $instituicoes->getInstituicoes();
+            if ($instituicoes->getRowCount() > 0):
+              foreach ($instituicoes->getResult() as $instituicao):
+                if (($instituicao['instituicao_id'] == $dados['tb_instituicoes_instituicao_id'])):
+                  echo "<option value=\"{$instituicao['instituicao_id']}\" selected=\"selected\">{$instituicao['instituicao_nome']}</option>";
+                else:
+                  echo "<option value=\"{$instituicao['instituicao_id']}\">{$instituicao['instituicao_nome']}</option>";
+                endif;
+              endforeach;
+            endif;
+            ?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label for="aluno_serie" class="col-md-3 control-label">Serie</label>
         <div class="col-md-2">
           <input type="text" class="form-control" name="aluno_serie" id="aluno_serie" placeholder="2A"
@@ -167,28 +189,6 @@
                 else:
                   echo "<option value=\"{$rotas['rota_id']}\">{$rotas['instituicao_nome']} X "
                   . "{$rotas['bairros_nome']} - {$rotas['veiculo_placa']}</option>";
-                endif;
-              endforeach;
-            endif;
-            ?>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="tb_instituicoes_instituicao_id" class="col-md-3 control-label">Escolas</label>
-        <div class="col-md-4">
-          <select class="form-control" name="tb_instituicoes_instituicao_id" id="tb_instituicoes_instituicao_id" required="required">
-            <option value="">Selecione...</option>
-            <?php
-            $instituicoes = new ModelInstituicao();
-            $instituicoes->getInstituicoes();
-            if ($instituicoes->getRowCount() > 0):
-              foreach ($instituicoes->getResult() as $instituicao):
-                if (($instituicao['instituicao_id'] == $dados['tb_instituicoes_instituicao_id'])):
-                  echo "<option value=\"{$instituicao['instituicao_id']}\" selected=\"selected\">{$instituicao['instituicao_nome']}</option>";
-                else:
-                  echo "<option value=\"{$instituicao['instituicao_id']}\">{$instituicao['instituicao_nome']}</option>";
                 endif;
               endforeach;
             endif;

@@ -1,9 +1,3 @@
-<?php
-$page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
-$view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
-$erros = array('401', '403', '404', '500');
-?>
-
 <div class="container-fluid">
   <form action="" method="post" class="form-horizontal" id="frm-geral">
 

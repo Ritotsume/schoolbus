@@ -83,6 +83,11 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php
+                        $page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
+                        $view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
+                        $erros = array('401', '403', '404', '500');
+                        ?>
                         <li class="dropdown profile">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Adm Teste <span class="caret"></span></a>
                             <ul class="dropdown-menu animated fadeInDown">
@@ -90,7 +95,7 @@
                                     <img src="<?= HOME; ?>img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
                                 </li>
                                 <li>
-                                  <!-- dados do profile -->
+                                    <!-- dados do profile -->
                                     <div class="profile-info">
                                         <h4 class="username">Adm Teste</h4>
                                         <p>adm@email.com</p>

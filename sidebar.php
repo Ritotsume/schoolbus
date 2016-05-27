@@ -11,12 +11,13 @@
 				</button>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active">
+				<li class="<?= (isset($page) && $page == 'home') ? 'active' : ''; ?>">
 					<a href="<?= HOME; ?>home">
 						<span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
 					</a>
 				</li>
-				<li class="panel panel-default dropdown">
+				<li class="panel panel-default dropdown
+				<?= (isset($view) && $view == 'cadastra') ? 'active' : ''; ?>">
 					<a data-toggle="collapse" href="#dropdown-entries">
 						<span class="icon fa fa-archive"></span><span class="title">Cadastros</span>
 					</a>
@@ -43,7 +44,8 @@
 						</div>
 					</div>
 				</li>
-				<li class="panel panel-default dropdown">
+				<li class="panel panel-default dropdown
+				<?= (isset($page) && !empty($page) && $view != 'cadastra' && $page != 'home') ? 'active' : ''; ?>">
 					<a data-toggle="collapse" href="#dropdown-controls">
 						<span class="icon fa fa-tasks"></span><span class="title">Controle</span>
 					</a>

@@ -19,6 +19,7 @@
 <!-- Javascript -->
 <script type="text/javascript" src="<?= HOME; ?>lib/js/bootbox.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/toast.min.js"></script>
+<script type="text/javascript" src="<?= HOME; ?>js/app.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>js/myscripts.js"></script>
 </body>
 </html>

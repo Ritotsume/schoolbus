@@ -4,19 +4,6 @@
   $idAluno = filter_input(INPUT_GET, 'param', FILTER_DEFAULT);
   $param = filter_input(INPUT_GET, 'ref', FILTER_VALIDATE_INT);
 
-  // $desc = Conn::getConnection();
-  // $datas = $desc->prepare('describe tb_aluno');
-  // $datas->setFetchMode(PDO::FETCH_ASSOC);
-  // $datas->execute();
-  // $checkNull = $datas->fetchAll();
-  // if($checkNull[3]['Null'] == 'YES'):
-  //   echo '*';
-  // else:
-  //   echo '-5-';
-  // endif;
-
-  // var_dump($checkNull);
-
   if (isset($dados) && !empty($dados)):
     if (isset($dados['editar'])):
       unset($dados['search_form'], $dados['editar']);
@@ -38,8 +25,8 @@
   endif;
 
   if (isset($idAluno) && !empty($idAluno)):
-    $read = new Read();
-    $read->Reader('tb_aluno', 'where aluno_id = :id', "id={$idAluno}");
+    $read = new ModelAluno;
+    $read->getAluno($idAluno);
     if ($read->getResult()):
       ?>
 
@@ -84,7 +71,30 @@
             <label for="aluno_nascimento" class="col-xs-3 control-label">Nascimento</label>
             <div class="col-xs-4">
               <input type="date" class="form-control" name="aluno_nascimento" id="aluno_nascimento" placeholder="01/01/1991"
-              value="<?= isset($dados['aluno_nascimento']) ? $dados['aluno_nascimento'] : date('d-m-Y', strtotime($read->getResult()[0]['aluno_nascimento'])); ?>" />
+              value="<?= isset($dados['aluno_nascimento']) ? $dados['aluno_nascimento'] : date('d/m/Y', strtotime($read->getResult()[0]['aluno_nascimento'])); ?>" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tb_instituicoes_instituicao_id" class="col-md-3 control-label">Escola</label>
+            <div class="col-md-4">
+              <select class="form-control" name="tb_instituicoes_instituicao_id" id="tb_instituicoes_instituicao_id" required="required">
+                <option value="">Selecione...</option>
+                <?php
+                $instituicoes = new ModelInstituicao();
+                $instituicoes->getInstituicoes();
+                if ($instituicoes->getRowCount() > 0):
+                  foreach ($instituicoes->getResult() as $instituicao):
+                    if (($instituicao['instituicao_id'] == $dados['tb_instituicoes_instituicao_id']) ||
+                    ($instituicao['instituicao_id'] == $read->getResult()[0]['tb_instituicoes_instituicao_id'])):
+                      echo "<option value=\"{$instituicao['instituicao_id']}\" selected=\"selected\">{$instituicao['instituicao_nome']}</option>";
+                    else:
+                      echo "<option value=\"{$instituicao['instituicao_id']}\">{$instituicao['instituicao_nome']}</option>";
+                    endif;
+                  endforeach;
+                endif;
+                ?>
+              </select>
             </div>
           </div>
 
@@ -164,11 +174,8 @@
           <div class="col-xs-5">
             <select class="form-control" name="tb_rotas_rota_id" id="tb_rotas_rota_id">
               <?php
-              $readerlog->Reader('tb_rotas', 'inner join tb_instituicoes on '
-              . 'tb_rotas.tb_instituicoes_instituicao_id = tb_instituicoes.instituicao_id '
-              . 'inner join tb_veiculos on tb_rotas.tb_veiculos_veiculo_placa = tb_veiculos.veiculo_placa '
-              . 'inner join tb_logradouros on tb_rotas.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-              . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id');
+              $readerlog = new ModelRotas;
+              $readerlog->getRotas();
               if ($readerlog->getRowCount() > 0):
                 foreach ($readerlog->getResult() as $rotas):
                   if (($rotas['rota_id'] == $dados['tb_rotas_rota_id']) ||

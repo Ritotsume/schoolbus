@@ -83,6 +83,23 @@ class ModelMotorista {
         endif;
     }
 
+    public function getMotorista($idmotorista)
+    {
+        $read = new Read;
+
+        $read->Reader(self::Entity, 'inner join tb_logradouros on ' .
+        self::Entity . '.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
+        . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id '
+        . ' where motorista_id = :id', "id={$idmotorista}");
+        if($read->getResult()):
+            $this->result = $read->getResult();
+            $this->rowcount = $read->getRowCount();
+        else:
+            $this->result = false;
+            $this->rowcount = 0;
+        endif;
+    }
+
     public function getResult() {
         return $this->result;
     }

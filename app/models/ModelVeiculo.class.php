@@ -36,12 +36,12 @@ class ModelVeiculo {
         endif;
     }
 
-    public function ModelUpdate($placa, array $dados) {
-        $this->veiculo = $placa;
+    public function ModelUpdate($idveiculo, array $dados) {
+        $this->veiculo = $idveiculo;
         $this->data = $dados;
 
         $update = new Update();
-        $update->Updater(self::Entity, $this->data, 'where veiculo_placa = :placa', "placa={$this->veiculo}");
+        $update->Updater(self::Entity, $this->data, 'where veiculo_id = :id', "id={$this->veiculo}");
         if ($update->getResult()):
             $this->result = true;
         else:
@@ -71,6 +71,20 @@ class ModelVeiculo {
                 $this->result = false;
                 $this->rowcount = 0;
             endif;
+        endif;
+    }
+
+    public function getVeiculo($idveiculo)
+    {
+        $read = new Read;
+
+        $read->Reader(self::Entity, 'where veiculo_id = :id', "id={$idveiculo}");
+        if($read->getResult()):
+            $this->result = $read->getResult();
+            $this->rowcount = $read->getRowCount();
+        else:
+            $this->result = false;
+            $this->rowcount = 0;
         endif;
     }
 

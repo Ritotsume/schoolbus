@@ -1,8 +1,7 @@
 <div class="side-body">
-
   <?php
   $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-  $idVeiculo = filter_input(INPUT_GET, 'param', FILTER_DEFAULT);
+  $idVeiculo = filter_input(INPUT_GET, 'param', FILTER_VALIDATE_INT);
   $param = filter_input(INPUT_GET, 'ref', FILTER_DEFAULT);
 
   if (isset($dados) && !empty($dados)):
@@ -24,8 +23,8 @@
   endif;
 
   if (isset($idVeiculo) && !empty($idVeiculo)):
-    $read = new Read();
-    $read->Reader('tb_veiculos', 'where veiculo_placa = :placa', "placa={$idVeiculo}");
+    $read = new ModelVeiculo;
+    $read->getVeiculo($idVeiculo);
     if ($read->getResult()):
       ?>
       <div class="page-title">
@@ -42,7 +41,7 @@
         <div class="card-body">
 
           <div class="form-group">
-            <label for="veiculo_placa" class="col-xs-3 control-label">Placa</label>
+            <label for="veiculo_placa" class="col-xs-3 control-label">*Placa</label>
             <div class="col-xs-2">
               <input type="text" name="veiculo_placa" id="veiculo_placa" placeholder="ABC1234" class="form-control"
               value="<?= isset($dados['veiculo_placa']) ? $dados['veiculo_placa'] : $read->getResult()[0]['veiculo_placa']; ?>" />
@@ -50,7 +49,7 @@
           </div>
 
           <div class="form-group">
-            <label for="veiculo_marca" class="col-xs-3 control-label">Marca</label>
+            <label for="veiculo_marca" class="col-xs-3 control-label">*Marca</label>
             <div class="col-xs-3">
               <input type="text" name="veiculo_marca" id="veiculo_marca" placeholder="Marcopolo" class="form-control"
               value="<?= isset($dados['veiculo_marca']) ? $dados['veiculo_marca'] : $read->getResult()[0]['veiculo_marca']; ?>" />
@@ -58,7 +57,7 @@
           </div>
 
           <div class="form-group">
-            <label for="veiculo_modelo" class="col-xs-3 control-label">Modelo</label>
+            <label for="veiculo_modelo" class="col-xs-3 control-label">*Modelo</label>
             <div class="col-xs-3">
               <input type="text" name="veiculo_modelo" id="veiculo_modelo" placeholder="A770" class="form-control"
               value="<?= isset($dados['veiculo_modelo']) ? $dados['veiculo_modelo'] : $read->getResult()[0]['veiculo_modelo']; ?>" />
@@ -66,7 +65,7 @@
           </div>
 
           <div class="form-group">
-            <label for="veiculo_poltronas" class="col-xs-3 control-label">Poltronas</label>
+            <label for="veiculo_poltronas" class="col-xs-3 control-label">*Poltronas</label>
             <div class="col-xs-2">
               <input type="number" name="veiculo_poltronas" id="veiculo_poltronas" placeholder="44" class="form-control"
               value="<?= isset($dados['veiculo_poltronas']) ? $dados['veiculo_poltronas'] : $read->getResult()[0]['veiculo_poltronas']; ?>" />

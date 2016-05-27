@@ -4,19 +4,6 @@
   $idMotorista = filter_input(INPUT_GET, 'param', FILTER_DEFAULT);
   $param = filter_input(INPUT_GET, 'ref', FILTER_VALIDATE_INT);
 
-  // $desc = Conn::getConnection();
-  // $datas = $desc->prepare('describe tb_aluno');
-  // $datas->setFetchMode(PDO::FETCH_ASSOC);
-  // $datas->execute();
-  // $checkNull = $datas->fetchAll();
-  // if($checkNull[3]['Null'] == 'YES'):
-  //   echo '*';
-  // else:
-  //   echo '-5-';
-  // endif;
-
-  // var_dump($checkNull);
-
   if (isset($dados) && !empty($dados)):
     if (isset($dados['editar'])):
       unset($dados['search_form'], $dados['editar']);
@@ -38,8 +25,8 @@
   endif;
 
   if (isset($idMotorista) && !empty($idMotorista)):
-    $read = new Read();
-    $read->Reader('tb_motoristas', 'where motorista_id = :id', "id={$idMotorista}");
+    $read = new ModelMotorista;
+    $read->getMotorista($idMotorista);
     if ($read->getResult()):
       ?>
 
@@ -111,7 +98,7 @@
             </select>
           </div>
         </div>
-        
+
         <div class="form-group">
           <label for="" class="col-xs-3"></label>
           <div class="col-xs-2">

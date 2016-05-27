@@ -4,19 +4,6 @@
   $idEscola = filter_input(INPUT_GET, 'param', FILTER_DEFAULT);
   $param = filter_input(INPUT_GET, 'ref', FILTER_VALIDATE_INT);
 
-  // $desc = Conn::getConnection();
-  // $datas = $desc->prepare('describe tb_aluno');
-  // $datas->setFetchMode(PDO::FETCH_ASSOC);
-  // $datas->execute();
-  // $checkNull = $datas->fetchAll();
-  // if($checkNull[3]['Null'] == 'YES'):
-  //   echo '*';
-  // else:
-  //   echo '-5-';
-  // endif;
-
-  // var_dump($checkNull);
-
   if (isset($dados) && !empty($dados)):
     if (isset($dados['editar'])):
       unset($dados['search_form'], $dados['editar'], $dados['telefone']);
@@ -38,8 +25,8 @@
   endif;
 
   if (isset($idEscola) && !empty($idEscola)):
-    $read = new Read();
-    $read->Reader('tb_instituicoes', 'where instituicao_id = :id', "id={$idEscola}");
+    $read = new ModelInstituicao;
+    $read->getInstituicao($idEscola);
     if ($read->getResult()):
       ?>
       <div class="page-title">
@@ -71,14 +58,6 @@
           </div>
 
           <div class="form-group">
-            <label for="instituicao_cnpj" class="col-xs-3 control-label">CNPJ</label>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" name="instituicao_cnpj" id="instituicao_cnpj" placeholder="23.123.123/0001-00" required="required"
-              value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : $read->getResult()[0]['instituicao_cnpj']; ?>" />
-            </div>
-          </div>
-
-          <div class="form-group">
             <label for="telefone" class="col-xs-3 control-label">Telefone</label>
             <div class="col-xs-4">
               <input type="number" class="form-control" name="telefone" id="telefone" placeholder="(27)3333-3333"
@@ -91,6 +70,14 @@
             <div class="col-xs-5">
               <input type="email" class="form-control" name="instituicao_email" id="instituicao_email" placeholder="teste@exemplo.com.br"
               value="<?= isset($dados['instituicao_email']) ? $dados['instituicao_email'] : $read->getResult()[0]['instituicao_email']; ?>" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="instituicao_cnpj" class="col-xs-3 control-label">CNPJ</label>
+            <div class="col-xs-4">
+              <input type="text" class="form-control" name="instituicao_cnpj" id="instituicao_cnpj" placeholder="23.123.123/0001-00" required="required"
+              value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : $read->getResult()[0]['instituicao_cnpj']; ?>" />
             </div>
           </div>
 

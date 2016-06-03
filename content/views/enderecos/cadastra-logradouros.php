@@ -18,7 +18,7 @@
     else:
       $_SESSION['last_request']  = $request;
       $cadastra->CriaLogradouro($dados);
-      if($cadastra->getRowCount() > 0):
+      if($cadastra->getResult()):
         echo  "<div class='alert alert-success alert-dismissible' role='alert'>
         <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
         <strong><span class='fa fa-check-circle'></span></strong> Motorista <b>{$dados['logradouro_nome']}</b> cadastrado(a) com sucesso.

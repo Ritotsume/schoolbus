@@ -45,6 +45,18 @@ class ModelEnderecos {
         endif;
     }
 
+    public function CriaCidade(array $data) {
+        $this->data = $data;
+        $create = new Create();
+
+        $create->Inserter(self::Cidade, $this->data);
+        if ($create->getResult()):
+            $this->result = $create->getResult();
+        else:
+            $this->result = false;
+        endif;
+    }
+
     public function ModelDelete($id) {
         $this->rota = (int) $id;
 

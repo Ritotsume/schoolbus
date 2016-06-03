@@ -350,7 +350,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <a href="#">
+              <a href="<?= HOME; ?>enderecos/cidades">
                 <div class="card green summary-inline">
                   <div class="card-body">
                     <i class="icon fa fa-map fa-4x"></i>

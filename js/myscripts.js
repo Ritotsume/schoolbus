@@ -4,11 +4,21 @@
 
 $(document).ready(function () {
 
-  $('.datatable').DataTable({
-    "language": {
-            "url": "./lib/js/dt-table-pt-br.json"
-        }
-  });
+  if ( $.fn.dataTable.isDataTable( '.datatable' ) ) {
+    table = $('.datatable').DataTable(
+      "language": {
+        "url": "./lib/js/dt-table-pt-br.json"
+      }
+    );
+  }
+  else {
+    table = $('.datatable').DataTable( {
+      paging: false,
+      "language": {
+        "url": "./lib/js/dt-table-pt-br.json"
+      }
+    } );
+  }
 
   $('button[data-cadastrar]').on('click', function(){
     var local = $(this).attr('data-cadastrar');

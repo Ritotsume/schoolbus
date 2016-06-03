@@ -325,7 +325,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <a href="#">
+              <a href="<?= HOME; ?>enderecos/bairros">
                 <div class="card yellow summary-inline">
                   <div class="card-body">
                     <i class="icon fa fa-map-signs fa-4x"></i>

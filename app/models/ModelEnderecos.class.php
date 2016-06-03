@@ -45,6 +45,18 @@ class ModelEnderecos {
         endif;
     }
 
+    public function CriaBairro(array $data) {
+        $this->data = $data;
+        $create = new Create();
+
+        $create->Inserter(self::Bairro, $this->data);
+        if ($create->getResult()):
+            $this->result = $create->getResult();
+        else:
+            $this->result = false;
+        endif;
+    }
+
     public function CriaCidade(array $data) {
         $this->data = $data;
         $create = new Create();

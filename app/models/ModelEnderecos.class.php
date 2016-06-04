@@ -69,13 +69,14 @@ class ModelEnderecos {
         endif;
     }
 
-    public function ModelDelete($id) {
-        $this->rota = (int) $id;
+    public function DeleteCidade($id) {
 
         $delete = new Delete();
-        $delete->Deleter(self::Entity, 'where rota_id = :id', "id={$this->rota}");
+        $delete->Deleter(self::Cidade, 'where cidade_id = :id', "id={$id}");
         if ($delete->getResult()):
             $this->result = true;
+        else:
+            $this->result = false;
         endif;
     }
 

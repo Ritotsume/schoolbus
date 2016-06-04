@@ -44,7 +44,7 @@
                     <td><?= $regs['cidade_nome']; ?></td>
                     <td><?= $regs['cidade_uf']; ?></td>
                     <td>
-                      <a href="<?= HOME; ?>enderecos/update-logradouros/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
+                      <a href="<?= HOME; ?>enderecos/update-cidades/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
                       <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
                         data-local="enderecos" title="Excluir"><i class="fa fa-minus-circle"></i></button>
                     </td>

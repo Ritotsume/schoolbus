@@ -79,12 +79,11 @@ class ModelEnderecos {
         endif;
     }
 
-    public function ModelUpdate($id, array $dados) {
-        $this->rota = (int) $id;
+    public function UpdateCidade($id, array $dados) {
         $this->data = $dados;
 
         $update = new Update();
-        $update->Updater(self::Entity, $this->data, 'where rota_id = :id', "id={$this->rota}");
+        $update->Updater(self::Cidade, $this->data, 'where cidade_id = :id', "id={$id}");
         if ($update->getResult()):
             $this->result = true;
         else:
@@ -130,6 +129,17 @@ class ModelEnderecos {
         else:
             $this->result = false;
             $this->rowcount = 0;
+        endif;
+    }
+
+    public function getCidade($cidade){
+        $read = new Read;
+
+        $read->Reader(self::Cidade, "where cidade_id = :id", "id={$cidade}");
+        if ($read->getRowCount() > 0):
+            return $read->getResult();
+        else:
+            return false;
         endif;
     }
 

@@ -18,6 +18,23 @@
           $logradouros = new ModelEnderecos;
           $logradouros->getLogradouros();
 
+          $del_id = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+          if(isset($del_id) && !empty($del_id)):
+            $del_logradouro = clone $logradouros;
+            $del_logradouro->DeleteLogradouro($del_id['delete']);
+            if($del_logradouro->getResult()):
+              echo  "<div class='alert alert-success alert-dismissible' role='alert'>
+              <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+              <strong><span class='fa fa-check-circle'></span></strong> Logradouro deletado com sucesso.
+              </div>";
+            else:
+              echo  "<div class='alert alert-warning alert-dismissible' role='alert'>
+              <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+              <strong><span class='fa fa-exclamation-circle'></span></strong> Erro ao deletar. Este logradouro pode estar sendo utilizada.
+              </div>";
+            endif;
+          endif;
+
           if ($logradouros->getRowCount() > 0):
             ?>
             <table class="datatable table table-striped" cellspacing="0" width="100%">
@@ -48,8 +65,7 @@
                     <td><?= $regs['bairros_nome']; ?></td>
                     <td>
                       <a href="<?= HOME; ?>enderecos/update-logradouros/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
-                      <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
-                        data-local="enderecos" title="Excluir"><i class="fa fa-minus-circle"></i></button>
+                        <button type="submit" class="btn btn-danger delete-reg" name="delete" value="<?= $id; ?>" title="Excluir"><i class="fa fa-minus-circle"></i></button>
                     </td>
                   </tr>
                   <?php

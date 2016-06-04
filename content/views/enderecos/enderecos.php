@@ -1,16 +1,12 @@
 <div class="side-body">
   <div class="page-title">
-    <span class="title">Relatório de Motoristas</span>
-    <div class="description">Relatório de motoristas cadastrados no sistema.</div>
+    <span class="title">Suporte ao cadastro de endereços do sistema</span>
+    <div class="description">Nessa área podem ser feitos cadastros de endereços, atualizar as informações de um
+      já existente, ou ainda excluir algum registro caso seja necessário.</div>
   </div>
   <div class="row">
     <div class="col-xs-12">
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">
-            <div class="title">Dados gerais</div>
-          </div>
-        </div>
         <div class="card-body">
           <div class="row">
 
@@ -40,7 +36,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <a href="#">
+              <a href="<?= HOME; ?>enderecos/bairros">
                 <div class="card yellow summary-inline">
                   <div class="card-body">
                     <i class="icon fa fa-map-signs fa-4x"></i>
@@ -65,7 +61,7 @@
             </div>
 
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-              <a href="#">
+              <a href="<?= HOME; ?>enderecos/cidades">
                 <div class="card green summary-inline">
                   <div class="card-body">
                     <i class="icon fa fa-map fa-4x"></i>

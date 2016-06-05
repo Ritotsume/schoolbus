@@ -1,4 +1,4 @@
-<?php
+uem<?php
 
 /**
 * <b>ModelEnderecos</b>: Classe responsável por controlar a base de endereços do sistema.
@@ -15,23 +15,6 @@ class ModelEnderecos {
     private $data;
     private $result;
     private $rowcount;
-
-    /**
-    * <b>ModelCreator</b>: Método responsável por efetivar o cadastro da rota no sistema.
-    * @param array $data Array com os dados necessários para cadastro da rota.
-    * @return bool Retorna TRUE caso a função seja executada com sucesso, ou FALSE em caso de falha.
-    */
-    public function ModelCreator(array $data) {
-        $this->data = $data;
-        $create = new Create();
-
-        $create->Inserter(self::Entity, $this->data);
-        if ($create->getResult()):
-            $this->result = $create->getResult();
-        else:
-            $this->result = false;
-        endif;
-    }
 
     public function CriaLogradouro(array $data) {
         $this->data = $data;

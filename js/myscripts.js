@@ -5,11 +5,11 @@
 $(document).ready(function () {
 
   if ( $.fn.dataTable.isDataTable( '.datatable' ) ) {
-    table = $('.datatable').DataTable(
+    table = $('.datatable').DataTable({
       "language": {
         "url": "./lib/js/dt-table-pt-br.json"
       }
-    );
+    });
   }
   else {
     table = $('.datatable').DataTable( {
@@ -167,6 +167,15 @@ function toggleTheme()
   }
 }
 
+var fecharItem = function()
+{
+  $('.fecha-item').on('click', function(){
+  console.log(this);
+    $(this).closest('li').fadeOut();
+    $(this).closest('li').find('input').remove();
+  });
+}
+
 var appendLogradouros = function()
 {
   $('.add-logradouros').on('click', function(){
@@ -180,13 +189,13 @@ var appendLogradouros = function()
     // "<p>"+ textareaValue +"</p>"+
     // "<input type=\"hidden\" name=\"caminhos[]\" value='"+ selectValue +"' /></div>");
 
-    $('#list-group-logradouros').append('<a href="#" class="list-group-item list-group-item-success" role="alert">'+
-    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
-    '<h4 class="list-group-item-heading"><i class="fa fa-map-signs"></i> '+ selectText +'</h4>'+
+    $('#list-group-logradouros > ul').append('<li class="list-group-item list-group-item-success"><span class="badge fecha-item">remover</span><h4 class="list-group-item-heading"><i class="fa fa-map-signs"></i> '+ selectText +'</h4>'+
     '<p class="list-group-item-text">'+ textareaValue +'</p>'+
     '<input type="hidden" name="caminhos[]" value="'+ selectValue +'" />'+
-    '<input type="hidden" name="observacoes[]" value="'+ textareaValue +'" /></a>');
-    // console.log(selectText);
+    '<input type="hidden" name="observacoes[]" value="'+ textareaValue +'" /></li>');
+    console.log(selectText);
+    fecharItem();
   });
 }
+fecharItem();
 appendLogradouros();

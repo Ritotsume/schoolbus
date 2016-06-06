@@ -10,6 +10,10 @@ body {
 * {
   outline: none; }
 
+.fecha-item{
+  cursor: pointer;
+}
+
 .row > [class*="col-"] {
   margin-bottom: 25px; }
 

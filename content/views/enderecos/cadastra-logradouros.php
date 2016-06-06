@@ -21,7 +21,7 @@
       if($cadastra->getResult()):
         echo  "<div class='alert alert-success alert-dismissible' role='alert'>
         <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-        <strong><span class='fa fa-check-circle'></span></strong> Motorista <b>{$dados['logradouro_nome']}</b> cadastrado(a) com sucesso.
+        <strong><span class='fa fa-check-circle'></span></strong> Logradouro <b>{$dados['logradouro_nome']}</b> cadastrado com sucesso.
         </div>";
       else:
         echo  "<div class='alert alert-warning alert-dismissible' role='alert'>

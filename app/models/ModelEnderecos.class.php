@@ -1,4 +1,4 @@
-uem<?php
+<?php
 
 /**
 * <b>ModelEnderecos</b>: Classe responsável por controlar a base de endereços do sistema.

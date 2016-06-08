@@ -112,7 +112,7 @@
                 if ($read->getResult()):
                   foreach ($read->getResult() as $veiculos):
                     $description = $veiculos['veiculo_marca'] . ' - ' . $veiculos['veiculo_modelo'];
-                    if(($veiculos['veiculo_placa'] == $dados['tb_veiculos_veiculo_placa']) || 
+                    if(($veiculos['veiculo_placa'] == $dados['tb_veiculos_veiculo_placa']) ||
                     ($veiculos['veiculo_placa'] == $readrota->getResult()[0]['tb_veiculos_veiculo_placa'])):
                       echo "<option value=\"{$veiculos['veiculo_placa']}\" selected=\"selected\">{$description}</option>";
                     else:

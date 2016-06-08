@@ -170,7 +170,6 @@ function toggleTheme()
 var fecharItem = function()
 {
   $('.fecha-item').on('click', function(){
-  console.log(this);
     $(this).closest('li').fadeOut();
     $(this).closest('li').find('input').remove();
   });
@@ -180,20 +179,23 @@ var appendLogradouros = function()
 {
   $('.add-logradouros').on('click', function(){
     var selectText = $('#tb_logradouros_logradouro_id > option:selected').text();
-    var selectValue = $('#tb_logradouros_logradouro_id').val();
+    var selectValue = $('#tb_logradouros_logradouro_id > option:selected').val();
+    // var selectValue = $('#tb_logradouros_logradouro_id').val();
     var textareaValue = $('#ref').val();
 
-    // $('#list-group-logradouros').append("<div class='alert alert-success alert-dismissible' role='alert'>"+
-    // "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+
-    // "<h4><strong><span class='fa fa-map-signs'></span></strong> "+ selectText +"</h4>"+
-    // "<p>"+ textareaValue +"</p>"+
-    // "<input type=\"hidden\" name=\"caminhos[]\" value='"+ selectValue +"' /></div>");
-
-    $('#list-group-logradouros > ul').append('<li class="list-group-item list-group-item-success"><span class="badge fecha-item">remover</span><h4 class="list-group-item-heading"><i class="fa fa-map-signs"></i> '+ selectText +'</h4>'+
+    $('#list-group-logradouros > #list-rota').append('<li class="list-group-item list-group-item-success"><span class="badge fecha-item">remover</span><h4 class="list-group-item-heading"><i class="fa fa-map-signs"></i> '+ selectText +'</h4>'+
     '<p class="list-group-item-text">'+ textareaValue +'</p>'+
     '<input type="hidden" name="caminhos[]" value="'+ selectValue +'" />'+
     '<input type="hidden" name="observacoes[]" value="'+ textareaValue +'" /></li>');
-    console.log(selectText);
+    fecharItem();
+  });
+
+  $('.add-escolas').on('click', function(){
+    var selectText = $('#escolas > option:selected').text();
+    var selectValue = $('#escolas > option:selected').val();
+
+    $('#list-group-logradouros > #list-escolas').append('<li class="list-group-item list-group-item-warning"><span class="badge fecha-item">remover</span><h4 class="list-group-item-heading"><i class="fa fa-institution"></i> '+ selectText +'</h4>'+
+    '<input type="hidden" name="escolas[]" value="'+ selectValue +'" /></li>');
     fecharItem();
   });
 }

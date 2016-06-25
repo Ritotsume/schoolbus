@@ -16,9 +16,17 @@ header('X-Permitted-Cross-Domain-Policies: master-only');
 
 session_cache_expire(30);
 session_start();
+
 include_once './app/Config.inc.php';
-include_once './header.php';
-include_once './sidebar.php';
-include_once './content.php';
-include_once './footer.php';
+$login = $_SESSION;
+$url_home = HOME;
+if(isset($login['schoolbus_login']) && !empty($login['schoolbus_login']))
+{
+  include_once './header.php';
+  include_once './sidebar.php';
+  include_once './content.php';
+  include_once './footer.php';
+}else{
+  header("Location: {$url_home}login.php");
+}
 ob_flush();

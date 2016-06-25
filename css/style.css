@@ -579,11 +579,12 @@ a:hover {
       margin-top: 15px; }
 
 body.login-page {
-  background: url(../../img/app-header-bg.jpg) no-repeat center center fixed;
+  background: url(../img/app-header-bg.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover; }
+  background-size: cover;
+}
   body.login-page .login-box {
     width: 100%;
     max-width: 320px;
@@ -624,6 +625,12 @@ body.login-page {
     text-align: right;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px; }
+    div.login-body {
+      background-color: slategrey !important;
+    }
+    div.login-body > form > div.control > input.form-control{
+      color: slategrey !important;
+    }
 
 @media (max-width: 768px) {
   body.login-page .login-form .login-header {

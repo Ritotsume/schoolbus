@@ -23,14 +23,14 @@ $(function() {
   return $('.match-height').matchHeight();
 });
 
-$(function() {
-  return $('.datatable').DataTable({
-    "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
-    language: {
-        url: './lib/js/dt-table-pt-br.json'
-    }
-  });
-});
+// $(function() {
+//   return $('.datatable').DataTable({
+//     "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
+//     language: {
+//         url: './lib/js/dt-table-pt-br.json'
+//     }
+//   });
+// });
 
 $(function() {
   return $(".side-menu .nav .dropdown").on('show.bs.collapse', function() {

@@ -5,11 +5,20 @@
 $(document).ready(function () {
 
   $('.datatable').DataTable({
-      "language": {
-        "url": "./lib/js/dt-table-pt-br.json"
-        // "url": "../lib/js/dt-table-pt-br.json"
+    "language": {
+      "url": "./lib/js/dt-table-pt-br.json"
+    },
+    dom: 'Bfrtip',
+    buttons:[
+      {
+        extend: 'print',
+        text: 'Imprimir',
+        exportOptions: {
+          columns: ':not(:last-child)'
+        }
       }
-    });
+    ]
+  });
 
   $('button[data-cadastrar]').on('click', function(){
     var local = $(this).attr('data-cadastrar');

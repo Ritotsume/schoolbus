@@ -16,9 +16,11 @@
 <script type="text/javascript" src="<?= HOME; ?>lib/js/ace/ace.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/ace/mode-html.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/ace/theme-github.js"></script>
-<!-- Javascript -->
 <script type="text/javascript" src="<?= HOME; ?>lib/js/bootbox.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/toast.min.js"></script>
+<script type="text/javascript" src="<?= HOME; ?>lib/js/buttons.print.js"></script>
+<script type="text/javascript" src="<?= HOME; ?>lib/js/dataTables.buttons.js"></script>
+<!-- Javascript -->
 <script type="text/javascript" src="<?= HOME; ?>js/app.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>js/myscripts.js"></script>
 </body>

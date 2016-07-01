@@ -1,7 +1,12 @@
+<?php
+$page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
+$view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
+$erros = array('401', '403', '404', '500');
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SchoolBus - Sistema de Gestão de Transporte Escolar</title>
+    <title>SchoolBus - <?= ucfirst($page); ?>s</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
@@ -32,9 +37,6 @@
                         <ol class="breadcrumb navbar-breadcrumb">
                             <!-- <li class="active">Dashboard</li> -->
                             <?php
-                            $page = filter_input(INPUT_GET, 'pag', FILTER_DEFAULT);
-                            $view = filter_input(INPUT_GET, 'view', FILTER_DEFAULT);
-                            $erros = array('401', '403', '404', '500');
                             if(isset($page) && !empty($page) && $page != 'home'): ?>
                             <li class="active"><a href="<?= HOME; ?>admin/<?= $page; ?>"><?= ucfirst(str_replace('-', ' ', $page)); ?></a></li>
                             <?php if(isset($view) && !empty($view)): ?>
@@ -106,7 +108,7 @@
                     }
                     ?>
                     <li class="dropdown profile">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Adm Teste <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= ucfirst($_SESSION['schoolbus_login']['username']); ?> <span class="caret"></span></a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
                                 <img src="<?= HOME; ?>img/profile/picjumbo.com_HNCK4153_resize.jpg" class="profile-img">
@@ -114,8 +116,8 @@
                             <li>
                                 <!-- dados do profile -->
                                 <div class="profile-info">
-                                    <h4 class="username">Adm Teste</h4>
-                                    <p>adm@email.com</p>
+                                    <h4 class="username"><?= ucfirst($_SESSION['schoolbus_login']['username']); ?></h4>
+                                    <!-- <p>adm@email.com</p> -->
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <form method="post" action="">
                                             <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>

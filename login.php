@@ -60,10 +60,10 @@
           </div> -->
           <form method="post" action="">
             <div class="control">
-              <input type="text" class="form-control" name="username" value="admin@gmail.com" autocomplete="off" />
+              <input type="text" class="form-control no-padding-top-bottom" name="username" value="admin@gmail.com" autocomplete="off" />
             </div>
             <div class="control">
-              <input type="password" name="password" class="form-control" value="123456" />
+              <input type="password" name="password" class="form-control no-padding-top-bottom" value="123456" />
             </div>
             <div class="login-button text-center">
               <input type="submit" class="btn btn-primary" value="Login">

@@ -28,29 +28,18 @@ class ModelRotas {
     $this->data = $data;
     $dataRota = array(
       'rota_instituicoes' => json_encode($this->data['escolas']),
-      'tb_veiculos_veiculo_id' => (int) $this->data['tb_veiculos_veiculo_placa'],
-      'tb_veiculos_inicio' => date('Y-m-d', strtotime(str_replace(array('/', '_', ' '), '-', $this->data['inicio']))),
-      'tb_veiculos_fim' => date('Y-m-d', strtotime(str_replace(array('/', '_', ' '), '-', $this->data['fim'])))
+      'tb_veiculos_veiculo_id' => (int) $this->data['rota_veiculo'],
+      'rota_inicio' => date('Y-m-d', strtotime(str_replace(array('/', '_', ' '), '-', $this->data['inicio']))),
+      'rota_fim' => date('Y-m-d', strtotime(str_replace(array('/', '_', ' '), '-', $this->data['fim']))),
+      'rota_saida' => (int) $this->data['rota_inicio'],
+      'rota_chegada' => (int) $this->data['rota_fim'],
+      'rota_observacoes' => $this->data['observacoes']
     );
     $create = new Create();
 
     $create->Inserter(self::Entity, $dataRota);
     if ($create->getResult()):
-      $createCaminho = clone $create;
-      $idRota = $create->getLastId();
-      for($x = 0; $x < count($this->data['caminhos']); $x++):
-        $dataCaminho = array(
-          'tb_rotas_rota_id' => (int) $idRota,
-          'tb_logradouros_logradouro_id' => (int) $this->data['caminhos'][$x],
-          'tb_caminho_ref' => $this->data['observacoes'][$x]
-        );
-        $createCaminho->Inserter('tb_caminhos_rota', $dataCaminho);
-      endfor;
-      if($createCaminho->getResult()):
-        $this->result = true;
-      else:
-        $this->result = false;
-      endif;
+      $this->result = true;
     else:
       $this->result = false;
     endif;
@@ -72,8 +61,18 @@ class ModelRotas {
     $this->rota = (int) $id;
     $this->data = $dados;
 
+    $dataRota = array(
+      'rota_instituicoes' => json_encode($this->data['escolas']),
+      'tb_veiculos_veiculo_id' => (int) $this->data['rota_veiculo'],
+      'rota_inicio' => date('Y-m-d', strtotime(str_replace(array('/', '_', ' '), '-', $this->data['inicio']))),
+      'rota_fim' => date('Y-m-d', strtotime(str_replace(array('/', '_', ' '), '-', $this->data['fim']))),
+      'rota_saida' => (int) $this->data['rota_inicio'],
+      'rota_chegada' => (int) $this->data['rota_fim'],
+      'rota_observacoes' => $this->data['observacoes']
+    );
+
     $update = new Update();
-    $update->Updater(self::Entity, $this->data, 'where rota_id = :id', "id={$this->rota}");
+    $update->Updater(self::Entity, $dataRota, 'where rota_id = :id', "id={$this->rota}");
     if ($update->getResult()):
       $this->result = true;
     else:
@@ -83,34 +82,52 @@ class ModelRotas {
 
   public function getRotas($status = null){
     $read = new Read;
-    if($status):
-      $read->Reader('tb_rotas', 'inner join tb_instituicoes on '
-      . 'tb_rotas.tb_instituicoes_instituicao_id = tb_instituicoes.instituicao_id '
-      . 'inner join tb_veiculos on tb_rotas.tb_veiculos_veiculo_id = tb_veiculos.veiculo_id '
-      . 'inner join tb_logradouros on tb_rotas.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-      . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id '
-      . 'where rota_status = :status', "status={$status}");
-      if ($read->getRowCount() > 0):
+    if(!is_null($status)):
+      $read->Reader(self::Entity, 'where rota_status = :status', "status={$status}");
+      if ($read->getResult()):
         $this->result = $read->getResult();
         $this->rowcount = $read->getRowCount();
       else:
-        $this->result = $read->getResult();
+        $this->result = false;
         $this->rowcount = 0;
       endif;
     else:
-      $read->Reader('tb_rotas', 'inner join tb_instituicoes on '
-      . 'tb_rotas.tb_instituicoes_instituicao_id = tb_instituicoes.instituicao_id '
-      . 'inner join tb_veiculos on tb_rotas.tb_veiculos_veiculo_id = tb_veiculos.veiculo_id '
-      . 'inner join tb_logradouros on tb_rotas.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-      . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id');
-      if ($read->getRowCount() > 0):
+      $read->Reader(self::Entity);
+      if ($read->getResult()):
         $this->result = $read->getResult();
         $this->rowcount = $read->getRowCount();
       else:
-        $this->result = $read->getResult();
+        $this->result = false;
         $this->rowcount = 0;
       endif;
     endif;
+  }
+
+  public function getRota($rota){
+    $read = new Read;
+    $read->Reader(self::Entity, 'where rota_id = :id', "id={$rota}");
+
+    if($read->getResult()){
+      return $read->getResult();
+    }else{
+      return false;
+    }
+  }
+
+  public function getInstituicoes($escolas){
+    $escolas = json_decode($escolas, true);
+    $read = new Read;
+    $data = array();
+    $div = '';
+
+    foreach($escolas as $escola){
+      $read->Reader('tb_instituicoes', 'where instituicao_id = :id', "id={$escola}");
+      if($read->getResult()){
+        $data[] = $read->getResult()[0]['instituicao_nome'];
+      }
+    }
+
+    return implode(', ', $data);
   }
 
   public function getResult() {

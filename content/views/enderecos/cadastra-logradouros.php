@@ -59,6 +59,7 @@
         <label for="logradouro_cep" class="col-md-3 control-label">CEP</label>
         <div class="col-md-3">
           <input type="text" name="logradouro_cep" id="logradouro_cep" placeholder="29930-000"
+          pattern="[0-9]{5}[-][0-9]{3}"
           class="form-control" value="<?= isset($dados['logradouro_cep']) ? $dados['logradouro_cep'] : ''; ?>" />
         </div>
       </div>

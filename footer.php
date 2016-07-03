@@ -18,6 +18,7 @@
 <script type="text/javascript" src="<?= HOME; ?>lib/js/ace/theme-github.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/bootbox.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/toast.min.js"></script>
+<script type="text/javascript" src="<?= HOME; ?>lib/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/buttons.print.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/dataTables.buttons.js"></script>
 <!-- Javascript -->

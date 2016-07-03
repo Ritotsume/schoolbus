@@ -17,7 +17,7 @@
             <li>Tente acessar novamente o conteúdo desejado.</li>
             <li>Anote a URL ou caminho utilizado que levou a esta página.</li>
             <li>
-              Entre em contato com o suporte para que o caso seja estudado. Lembre-se de emcaminhar as informações
+              Caso o erro persista, entre em contato com o suporte. Lembre-se de emcaminhar as informações
               obtidas no passo anterior, isso facilitará a solução do problema.
             </li>
           </ul>

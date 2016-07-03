@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <?php include_once './app/Config.inc.php'; ?>
 <head>
-  <title>Schoolbus - Sistema de Gerenciamento de Transporte Escolar</title>
+  <title>Schoolbus - Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>

@@ -138,8 +138,9 @@ class ModelEnderecos {
     public function getLogradouro($logradouro){
         $read = new Read;
 
-        $read->Reader(self::Logradouro, 'inner join tb_bairros on tb_bairros.bairros_id = '.
-        self::Logradouro .'.tb_bairros_bairros_id where logradouro_id = :id', "id={$logradouro}");
+        $read->Reader(self::Logradouro, 'inner join tb_bairros on tb_bairros.bairros_id = '.self::Logradouro.'.tb_bairros_bairros_id '.
+        'inner join tb_cidade on tb_cidade.cidade_id = tb_bairros.tb_cidade_cidade_id'.
+        ' where logradouro_id = :id', "id={$logradouro}");
         if ($read->getRowCount() > 0):
             return $read->getResult();
         else:

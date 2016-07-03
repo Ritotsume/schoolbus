@@ -4,19 +4,6 @@
   $idRota = filter_input(INPUT_GET, 'param', FILTER_DEFAULT);
   $param = filter_input(INPUT_GET, 'ref', FILTER_VALIDATE_INT);
 
-  // $desc = Conn::getConnection();
-  // $datas = $desc->prepare('describe tb_aluno');
-  // $datas->setFetchMode(PDO::FETCH_ASSOC);
-  // $datas->execute();
-  // $checkNull = $datas->fetchAll();
-  // if($checkNull[3]['Null'] == 'YES'):
-  //   echo '*';
-  // else:
-  //   echo '-5-';
-  // endif;
-
-  // var_dump($checkNull);
-
   if (isset($dados) && !empty($dados)):
     if (isset($dados['editar'])):
       unset($dados['search_form'], $dados['editar'], $dados['telefone']);
@@ -39,91 +26,153 @@
 
   if (isset($idRota) && !empty($idRota)):
     $readrota = new ModelRotas();
-    $readrota->getRotas();
-    if ($readrota->getResult()):
+    $dataRota = $readrota->getRota($idRota);
+    if ($dataRota):
       ?>
 
       <div class="page-title">
         <span class="title">Atualização de dados cadastrais</span>
-        <div class="description">Atualizando dados do motorista.</div>
+        <div class="description">Atualizando dados de rotas.</div>
       </div>
 
       <div class="card">
         <div class="card-header">
           <div class="card-title">
-            Atenção! Campos com (*) são de preenchimento obrigatório.
+            Atenção! TODOS os campos são de preenchimento obrigatório.
           </div>
         </div>
         <div class="card-body">
 
           <div class="form-group">
-            <label for="tb_instituicoes_instituicao_id" class="col-xs-3 control-label">Escolas</label>
-            <div class="col-xs-5">
-              <select class="form-control" name="tb_instituicoes_instituicao_id" id="tb_instituicoes_instituicao_id">
+            <label for="rota_inicio" class="col-md-3 control-label">Início do trajeto</label>
+            <div class="col-md-3">
+              <select name="rota_inicio" class="form-control" id="rota_inicio" required="required">
+                <option value="">Selecione...</option>
                 <?php
-                $read = new Read();
-                $stat = 'ativo';
-                $read->Reader('tb_instituicoes', 'where instituicao_status = :stat', "stat={$stat}");
-                if ($read->getResult()):
-                  foreach ($read->getResult() as $escolas):
-                    if(($escolas['instituicao_id'] == $dados['tb_instituicoes_instituicao_id']) ||
-                    ($escolas['instituicao_id'] == $readrota->getResult()[0]['tb_instituicoes_instituicao_id'])):
-                      echo "<option value=\"{$escolas['instituicao_id']}\" selected=\"selected\">{$escolas['instituicao_nome']}</option>";
-                    else:
-                      echo "<option value=\"{$escolas['instituicao_id']}\">{$escolas['instituicao_nome']}</option>";
-                    endif;
-                  endforeach;
-                endif;
+                $rotaInicio = new ModelEnderecos;
+                $rotaInicio->getLogradouros();
+                if($rotaInicio->getResult()){
+                  foreach($rotaInicio->getResult() as $inicio){
+                    if(($inicio['logradouro_id'] == $dataRota[0]['rota_saida']) ||
+                    ($inicio['logradouro_id'] == $dados['rota_inicio'])){
+                      echo "<option value='{$inicio['logradouro_id']}' selected='selected'>{$inicio['logradouro_nome']} - {$inicio['logradouro_cep']}</option>";
+                    }else{
+                      echo "<option value='{$inicio['logradouro_id']}'>{$inicio['logradouro_nome']} - {$inicio['logradouro_cep']}</option>";
+                    }
+                  }
+                }
                 ?>
               </select>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="tb_logradouros_logradouro_id" class="col-xs-3 control-label">Logradouros</label>
-            <div class="col-xs-5">
-              <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
+            <label for="rota_fim" class="col-md-3 control-label">Fim do trajeto</label>
+            <div class="col-md-3">
+              <select name="rota_fim" class="form-control" id="rota_fim" required="required">
+                <option value="">Selecione...</option>
                 <?php
-                $read->Reader('tb_logradouros', 'inner join tb_bairros on '
-                . 'tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id');
-                if ($read->getRowCount() > 0):
-                  foreach ($read->getResult() as $options):
-                    if(($options['logradouro_id'] == $dados['tb_logradouros_logradouro_id']) ||
-                    ($options['logradouro_id'] == $readrota->getResult()[0]['logradouro_id'])):
-                      echo "<option value=\"{$options['logradouro_id']}\" selected=\"selected\">{$options['logradouro_nome']} -- "
-                      . "{$options['bairros_nome']}</option>";
-                    else:
-                      echo "<option value=\"{$options['logradouro_id']}\">{$options['logradouro_nome']} -- "
-                      . "{$options['bairros_nome']}</option>";
-                    endif;
-                  endforeach;
-                endif;
+                $rotaFim = clone $rotaInicio;
+                $rotaFim->getLogradouros();
+                if($rotaFim->getResult()){
+                  foreach($rotaFim->getResult() as $fim){
+                    if(($fim['logradouro_id'] == $dataRota[0]['rota_chegada']) ||
+                    ($fim['logradouro_id'] == $dados['rota_fim'])){
+                      echo "<option value='{$fim['logradouro_id']}' selected='selected'>{$fim['logradouro_nome']} - {$fim['logradouro_cep']}</option>";
+                    }else{
+                      echo "<option value='{$fim['logradouro_id']}'>{$fim['logradouro_nome']} - {$fim['logradouro_cep']}</option>";
+                    }
+                  }
+                }
                 ?>
               </select>
             </div>
           </div>
 
+          <hr />
+
           <div class="form-group">
-            <label for="tb_veiculos_veiculo_placa" class="col-xs-3 control-label">Veículos</label>
-            <div class="col-xs-5">
-              <select class="form-control" name="tb_veiculos_veiculo_placa" id="tb_veiculos_veiculo_placa">
+            <label for="" class="col-md-3 control-label">Escolas</label>
+            <div class="col-md-7">
+              <?php
+              $escolasCad = json_decode($dataRota[0]['rota_instituicoes'], true);
+              $escolasData = new ModelInstituicao;
+              $escolasData->getInstituicoes(1);
+              if($escolasData->getResult()){
+                $escolas = $escolasData->getResult();
+                for($x = 0; $x < count($escolasData->getResult()); $x++){
+                  if(key_exists($x, $escolasCad) && ($escolas[$x]['instituicao_id'] == $escolasCad[$x])){
+                    echo "<input type='checkbox' name='escolas[]' value='{$escolas[$x]['instituicao_id']}' "
+                    ."checked='checked' /> {$escolas[$x]['instituicao_nome']}<br />";
+                  }else{
+                    echo "<input type='checkbox' name='escolas[]' value='{$escolas[$x]['instituicao_id']}' "
+                    ." /> {$escolas[$x]['instituicao_nome']}<br />";
+                  }
+                }
+              }
+              ?>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="form-group">
+            <label for="rota_veiculo" class="col-md-3 control-label">Veículo</label>
+            <div class="col-md-4">
+              <select class="form-control" name="rota_veiculo" id="rota_veiculo" required="required">
+                <option value="">Selecione</option>
                 <?php
-                $read->Reader('tb_veiculos', 'where veiculo_status = :stat', "stat={$stat}");
-                if ($read->getResult()):
-                  foreach ($read->getResult() as $veiculos):
-                    $description = $veiculos['veiculo_marca'] . ' - ' . $veiculos['veiculo_modelo'];
-                    if(($veiculos['veiculo_placa'] == $dados['tb_veiculos_veiculo_placa']) ||
-                    ($veiculos['veiculo_placa'] == $readrota->getResult()[0]['tb_veiculos_veiculo_placa'])):
-                      echo "<option value=\"{$veiculos['veiculo_placa']}\" selected=\"selected\">{$description}</option>";
-                    else:
-                      echo "<option value=\"{$veiculos['veiculo_placa']}\">{$description}</option>";
-                    endif;
-                  endforeach;
-                endif;
+                $stat = 1;
+                $veiculos = new ModelVeiculo;
+                $veiculos->getVeiculos($stat);
+                if ($veiculos->getResult()){
+                  foreach ($veiculos->getResult() as $veiculo){
+                    $description = $veiculo['veiculo_placa'] . ' - ' . $veiculo['veiculo_marca'] . ' - ' . $veiculo['veiculo_modelo'];
+                    if(($veiculo['veiculo_id'] == $dataRota[0]['tb_veiculos_veiculo_id']) ||
+                    ($veiculo['veiculo_id'] == $dados['rota_veiculo'])){
+                      echo "<option value=\"{$veiculo['veiculo_id']}\" selected='selected'>{$description}</option>";
+                    }else{
+                      echo "<option value=\"{$veiculo['veiculo_id']}\">{$description}</option>";
+                    }
+                  }
+                }
                 ?>
               </select>
             </div>
           </div>
+
+          <hr />
+
+          <div class="form-group">
+            <label for="" class="col-md-3 control-label">Período</label>
+            <div class="col-md-8">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <div class="input-group-addon">Início</div>
+                  <input type="date" name="inicio" class="form-control" placeholder="<?= date('d/m/Y'); ?>"
+                  value="<?= isset($dados['inicio']) ? date('d/m/Y', strtotime($dados['inicio'])) : date('d/m/Y', strtotime($dataRota[0]['rota_inicio'])); ?>" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <div class="input-group-addon">Fim</div>
+                  <input type="date" name="fim" class="form-control" placeholder="<?= date('d/m/Y', strtotime('+1 year')); ?>"
+                  value="<?= isset($dados['fim']) ? date('d/m/Y', strtotime($dados['fim'])) : date('d/m/Y', strtotime($dataRota[0]['rota_fim'])); ?>" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+
+          <div class="form-group">
+            <label for="observacoes" class="col-md-3 control-label">Observações</label>
+            <div class="col-md-4">
+              <textarea class="form-control" name="observacoes" id="observacoes" required="required"><?= isset($dados['observacoes']) ? $dados['observacoes'] : $dataRota[0]['rota_observacoes']; ?></textarea>
+            </div>
+          </div>
+
+          <hr />
 
           <div class="form-group">
             <label for="" class="col-xs-3"></label>

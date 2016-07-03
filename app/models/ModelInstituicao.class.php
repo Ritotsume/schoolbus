@@ -54,11 +54,23 @@ class ModelInstituicao {
         endif;
     }
 
-    public function getInstituicoes($id = null)
+    public function getInstituicoes($status = null)
     {
         $read = new Read;
 
-        if(is_null($id)):
+        if(!is_null($status)){
+            $read->Reader(self::Entity, 'inner join tb_logradouros on ' .
+            self::Entity . '.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
+            . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id '
+            . 'where instituicao_status = :status', "status={$status}");
+            if($read->getResult()):
+                $this->result = $read->getResult();
+                $this->rowcount = $read->getRowCount();
+            else:
+                $this->result = false;
+                $this->rowcount = 0;
+            endif;
+        }else{
             $read->Reader(self::Entity, 'inner join tb_logradouros on ' .
             self::Entity . '.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
             . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id');
@@ -69,19 +81,7 @@ class ModelInstituicao {
                 $this->result = false;
                 $this->rowcount = 0;
             endif;
-        else:
-            $read->Reader(self::Entity, 'inner join tb_logradouros on ' .
-            self::Entity . '.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
-            . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id '
-            . 'where instituicao_id = :id', "id={$id}");
-            if($read->getResult()):
-                $this->result = $read->getResult();
-                $this->rowcount = $read->getRowCount();
-            else:
-                $this->result = false;
-                $this->rowcount = 0;
-            endif;
-        endif;
+        }
     }
 
     public function getInstituicao($id)
@@ -91,6 +91,7 @@ class ModelInstituicao {
         $read->Reader(self::Entity, 'inner join tb_logradouros on ' .
         self::Entity . '.tb_logradouros_logradouro_id = tb_logradouros.logradouro_id '
         . 'inner join tb_bairros on tb_logradouros.tb_bairros_bairros_id = tb_bairros.bairros_id '
+        . 'inner join tb_cidade on tb_cidade.cidade_id = tb_bairros.tb_cidade_cidade_id '
         . 'where instituicao_id = :id', "id={$id}");
         if($read->getResult()):
             $this->result = $read->getResult();

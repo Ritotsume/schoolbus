@@ -14,7 +14,7 @@
         <div class="card-body">
           <?php
           $readmotorista = new ModelMotorista();
-          $readmotorista->getMotoristas(1);
+          $readmotorista->getMotoristas();
 
           if ($readmotorista->getRowCount() > 0):
             ?>
@@ -43,11 +43,11 @@
                   <tr>
                     <td><?= $regs['motorista_nome'] . ' ' . $regs['motorista_sobrenome']; ?></td>
                     <td><?= $regs['bairros_nome']; ?></td>
-                    <td><?= $regs['motorista_status'] ? '<span class="label label-success">Ativo</span>' : '<span class="label label-danger">Inativo</span>'; ?></td>
+                    <td><?= $regs['motorista_status'] ? '<span class="label label-success">Ativo</span>' : '<span class="label label-danger">Desligado</span>'; ?></td>
                     <td>
                       <a href="<?= HOME; ?>motorista/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
                       <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
-                        data-local="motorista" title="Excluir"><i class="fa fa-minus-circle"></i></button>
+                        data-local="motorista" title="Inativar/Ativar"><i class="fa fa-minus-circle"></i></button>
                     </td>
                   </tr>
                   <?php

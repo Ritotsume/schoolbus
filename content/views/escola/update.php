@@ -42,49 +42,57 @@
         </div>
         <div class="card-body">
           <div class="form-group">
-            <label for="instituicao_nome" class="col-xs-3 control-label">Nome</label>
+            <label for="instituicao_nome" class="col-xs-3 control-label">Nome*</label>
             <div class="col-xs-6">
-              <input type="text" class="form-control" name="instituicao_nome" id="instituicao_nome" placeholder="EMEF Água Salgada"
-              value="<?= isset($dados['instituicao_nome']) ? $dados['instituicao_nome'] : $read->getResult()[0]['instituicao_nome']; ?>" />
+              <input type="text" class="form-control" name="instituicao_nome" id="instituicao_nome" placeholder="Nome da escola"
+              value="<?= isset($dados['instituicao_nome']) ? $dados['instituicao_nome'] : $read->getResult()[0]['instituicao_nome']; ?>" required="required" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="instituicao_razao" class="col-xs-3 control-label">Razão</label>
+            <label for="instituicao_razao" class="col-xs-3 control-label">Razão*</label>
             <div class="col-xs-6">
-              <input type="text" class="form-control" name="instituicao_razao" id="instituicao_razao" placeholder="EMEF Água Salgada"
-              value="<?= isset($dados['instituicao_razao']) ? $dados['instituicao_razao'] : $read->getResult()[0]['instituicao_razao']; ?>" />
+              <input type="text" class="form-control" name="instituicao_razao" id="instituicao_razao" placeholder="Razão Social da escola"
+              value="<?= isset($dados['instituicao_razao']) ? $dados['instituicao_razao'] : $read->getResult()[0]['instituicao_razao']; ?>" required="required" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="telefone" class="col-xs-3 control-label">Telefone</label>
+            <label for="instituicao_cnpj" class="col-xs-3 control-label">CNPJ*</label>
             <div class="col-xs-4">
-              <input type="number" class="form-control" name="telefone" id="telefone" placeholder="(27)3333-3333"
-              value="<?= isset($dados['telefone']) ? $dados['telefone'] : ''; ?>" />
+              <input type="text" class="form-control" name="instituicao_cnpj" id="instituicao_cnpj" placeholder="CNPJ da escola" required="required"
+              value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : $read->getResult()[0]['instituicao_cnpj']; ?>" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="instituicao_tel" class="col-md-3 control-label">Telefone</label>
+            <div class="col-md-2">
+              <input type="tel" class="form-control" name="instituicao_tel" id="instituicao_tel" placeholder="Telefone"
+              value="<?= isset($dados['instituicao_tel']) ? $dados['instituicao_tel'] : $read->getResult()[0]['instituicao_tel']; ?>" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="instituicao_cel" class="col-md-3 control-label">Celular</label>
+            <div class="col-md-2">
+              <input type="tel" class="form-control" name="instituicao_cel" id="instituicao_cel" placeholder="Celular"
+              value="<?= isset($dados['instituicao_cel']) ? $dados['instituicao_cel'] : $read->getResult()[0]['instituicao_cel']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
             <label for="instituicao_email" class="col-xs-3 control-label">Email</label>
             <div class="col-xs-5">
-              <input type="email" class="form-control" name="instituicao_email" id="instituicao_email" placeholder="teste@exemplo.com.br"
+              <input type="email" class="form-control" name="instituicao_email" id="instituicao_email" placeholder="Email da escola"
               value="<?= isset($dados['instituicao_email']) ? $dados['instituicao_email'] : $read->getResult()[0]['instituicao_email']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="instituicao_cnpj" class="col-xs-3 control-label">CNPJ</label>
-            <div class="col-xs-4">
-              <input type="text" class="form-control" name="instituicao_cnpj" id="instituicao_cnpj" placeholder="23.123.123/0001-00" required="required"
-              value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : $read->getResult()[0]['instituicao_cnpj']; ?>" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="tb_logradouros_logradouro_id" class="col-xs-3 control-label">Endereço</label>
+            <label for="tb_logradouros_logradouro_id" class="col-xs-3 control-label">Endereço*</label>
             <div class="col-xs-5">
-              <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
+              <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id" required="required">
                 <?php
                 $readerlog = new Read;
                 $readerlog->Reader('tb_logradouros', 'inner join tb_bairros on '
@@ -109,7 +117,7 @@
         <div class="form-group">
           <label for="aluno_end_numero" class="col-xs-3 control-label">Número</label>
           <div class="col-xs-2">
-            <input type="number" class="form-control" name="instituicao_numero" id="instituicao_numero" placeholder="123"
+            <input type="text" class="form-control" name="instituicao_numero" id="instituicao_numero" placeholder="Número do prédio ou casa"
             value="<?= isset($dados['instituicao_numero']) ? $dados['instituicao_numero'] : $read->getResult()[0]['instituicao_numero']; ?>" />
           </div>
         </div>
@@ -117,7 +125,7 @@
         <div class="form-group">
           <label for="instituicao_diretor" class="col-xs-3 control-label">Diretor</label>
           <div class="col-xs-5">
-            <input type="text" class="form-control" name="instituicao_diretor" id="instituicao_diretor" placeholder="Juvenal Antena"
+            <input type="text" class="form-control" name="instituicao_diretor" id="instituicao_diretor" placeholder="Diretor da escola"
             value="<?= isset($dados['instituicao_diretor']) ? $dados['instituicao_diretor'] : $read->getResult()[0]['instituicao_diretor']; ?>" />
           </div>
         </div>

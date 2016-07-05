@@ -47,53 +47,58 @@
     <div class="card-body">
 
       <div class="form-group">
-        <label for="instituicao_nome" class="col-md-3 control-label">Nome</label>
+        <label for="instituicao_nome" class="col-md-3 control-label">Nome*</label>
         <div class="col-md-5">
-          <input type="text" class="form-control" name="instituicao_nome" id="instituicao_nome" placeholder="EMEF Água Salgada"
+          <input type="text" class="form-control" name="instituicao_nome" id="instituicao_nome" placeholder="Nome da escola"
           value="<?= isset($dados['instituicao_nome']) ? $dados['instituicao_nome'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="instituicao_razao" class="col-md-3 control-label">Razão</label>
+        <label for="instituicao_razao" class="col-md-3 control-label">Razão*</label>
         <div class="col-md-5">
-          <input type="text" class="form-control" name="instituicao_razao" id="instituicao_razao" placeholder="EMEF Água Salgada"
+          <input type="text" class="form-control" name="instituicao_razao" id="instituicao_razao" placeholder="Razão Social da escola"
           value="<?= isset($dados['instituicao_razao']) ? $dados['instituicao_razao'] : ''; ?>" />
         </div>
       </div>
 
-      <div class="form-group has-feedback">
-        <label for="telefone" class="col-md-3 control-label">Telefone</label>
+      <div class="form-group">
+        <label for="instituicao_cnpj" class="col-md-3 control-label">CNPJ*</label>
         <div class="col-md-3">
-          <div class="input-group">
-            <input type="tel" class="form-control" name="telefone" id="telefone"
-            placeholder="(27)3333-3333" />
-            <span class="input-group-addon"><i class="fa fa-plus-circle"></i></span>
-          </div>
-          <!-- <button type="button" class="btn-input-tel" id="btn-telefone-add" data-phone="add"><i class="fa fa-plus-circle"></i></button> -->
+          <input type="text" class="form-control" name="instituicao_cnpj" id="instituicao_cnpj" placeholder="CNPJ da escola"
+          value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : ''; ?>"
+          pattern="^[0-9]{2}[.][0-9]{3}[.][0-9]{3}[/][0-9]{4}[-][0-9]{2}$" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="instituicao_tel" class="col-md-3 control-label">Telefone</label>
+        <div class="col-md-2">
+          <input type="tel" class="form-control" name="instituicao_tel" id="instituicao_tel" placeholder="Telefone"
+          value="<?= isset($dados['instituicao_tel']) ? $dados['instituicao_tel'] : ''; ?>" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="instituicao_cel" class="col-md-3 control-label">Celular</label>
+        <div class="col-md-2">
+          <input type="tel" class="form-control" name="instituicao_cel" id="instituicao_cel" placeholder="Celular"
+          value="<?= isset($dados['instituicao_cel']) ? $dados['instituicao_cel'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
         <label for="instituicao_email" class="col-md-3 control-label">Email</label>
         <div class="col-md-5">
-          <input type="email" class="form-control" name="instituicao_email" id="instituicao_email" placeholder="teste@exemplo.com.br"
+          <input type="email" class="form-control" name="instituicao_email" id="instituicao_email" placeholder="Email da escola"
           value="<?= isset($dados['instituicao_email']) ? $dados['instituicao_email'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="instituicao_cnpj" class="col-md-3 control-label">CNPJ</label>
-        <div class="col-md-3">
-          <input type="number" class="form-control" name="instituicao_cnpj" id="instituicao_cnpj" placeholder="23.123.123/0001-00"
-          value="<?= isset($dados['instituicao_cnpj']) ? $dados['instituicao_cnpj'] : ''; ?>" />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="tb_logradouros_logradouro_id" class="col-md-3 control-label">Endereço</label>
+        <label for="tb_logradouros_logradouro_id" class="col-md-3 control-label">Endereço*</label>
         <div class="col-md-4">
-          <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
+          <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id" required="required">
             <option value="">Selecione...</option>
             <?php
             $readerlog = new Read;
@@ -118,7 +123,7 @@
       <div class="form-group">
         <label for="instituicao_numero" class="col-md-3 control-label">Número</label>
         <div class="col-md-2">
-          <input type="number" class="form-control" name="instituicao_numero" id="instituicao_numero" placeholder="123"
+          <input type="text" class="form-control" name="instituicao_numero" id="instituicao_numero" placeholder="Número do prédio ou casa"
           value="<?= isset($dados['instituicao_numero']) ? $dados['instituicao_numero'] : ''; ?>" />
         </div>
       </div>
@@ -126,15 +131,8 @@
       <div class="form-group">
         <label for="instituicao_diretor" class="col-md-3 control-label">Diretor</label>
         <div class="col-md-5">
-          <input type="text" class="form-control" name="instituicao_diretor" id="instituicao_diretor" placeholder="Juvenal Antena"
+          <input type="text" class="form-control" name="instituicao_diretor" id="instituicao_diretor" placeholder="Diretor da escola"
           value="<?= isset($dados['instituicao_diretor']) ? $dados['instituicao_diretor'] : ''; ?>" />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="" class="col-md-3 control-label">Telefones</label>
-        <div class="col-md-3">
-          <div id="telefones" class=""></div>
         </div>
       </div>
 
@@ -147,3 +145,4 @@
 
     </div>
   </div>
+</div>

@@ -47,41 +47,58 @@
     <div class="card-body">
 
       <div class="form-group">
-        <label for="motorista_nome" class="col-md-3 control-label">Nome</label>
+        <label for="motorista_nome" class="col-md-3 control-label">Nome*</label>
         <div class="col-md-5">
-          <input type="text" name="motorista_nome" id="motorista_nome" placeholder="Joaquim"
-          class="form-control" value="<?= isset($dados['motorista_nome']) ? $dados['motorista_nome'] : ''; ?>" />
+          <input type="text" name="motorista_nome" id="motorista_nome" placeholder="Nome do motorista"
+          class="form-control" value="<?= isset($dados['motorista_nome']) ? $dados['motorista_nome'] : ''; ?>" required="required" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="motorista_sobrenome" class="col-md-3 control-label">Sobrenome</label>
+        <label for="motorista_sobrenome" class="col-md-3 control-label">Sobrenome*</label>
         <div class="col-md-5">
-          <input type="text" name="motorista_sobrenome" id="motorista_sobrenome" placeholder="Silva Xavier"
-          class="form-control" value="<?= isset($dados['motorista_sobrenome']) ? $dados['motorista_sobrenome'] : ''; ?>" />
+          <input type="text" name="motorista_sobrenome" id="motorista_sobrenome" placeholder="Sobrenome do motorista"
+          class="form-control" value="<?= isset($dados['motorista_sobrenome']) ? $dados['motorista_sobrenome'] : ''; ?>" required="required" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for=motorista_rg"" class="col-md-3 control-label">RG</label>
+        <label for=motorista_rg"" class="col-md-3 control-label">RG*</label>
         <div class="col-md-3">
-          <input type="text" name="motorista_rg" id="motorista_rg" placeholder="12345"
-          class="form-control" value="<?= isset($dados['motorista_rg']) ? $dados['motorista_rg'] : ''; ?>" />
+          <input type="text" name="motorista_rg" id="motorista_rg" placeholder="RG do motorista"
+          class="form-control" value="<?= isset($dados['motorista_rg']) ? $dados['motorista_rg'] : ''; ?>" required="required" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="motorista_cpf" class="col-md-3 control-label">CPF</label>
+        <label for="motorista_cpf" class="col-md-3 control-label">CPF*</label>
         <div class="col-md-3">
-          <input type="number" name="motorista_cpf" id="motorista_cpf" placeholder="123.456.789-00"
+          <input type="text" name="motorista_cpf" id="motorista_cpf" placeholder="CPF do motorista"
+          pattern="^[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}$" title="Deve ser no formato xxx.xxx.xxx-xx"
           class="form-control" value="<?= isset($dados['motorista_cpf']) ? $dados['motorista_cpf'] : ''; ?>" />
         </div>
       </div>
 
       <div class="form-group">
-        <label for="tb_logradouros_logradouro_id" class="col-md-3 control-label">Endereço</label>
+        <label for="motorista_tel" class="col-md-3 control-label">Telefone</label>
+        <div class="col-md-2">
+          <input type="tel" class="form-control" name="motorista_tel" id="motorista_tel" placeholder="Telefone"
+          value="<?= isset($dados['motorista_tel']) ? $dados['motorista_tel'] : ''; ?>" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="motorista_cel" class="col-md-3 control-label">Celular</label>
+        <div class="col-md-2">
+          <input type="tel" class="form-control" name="motorista_cel" id="motorista_cel" placeholder="Celular"
+          value="<?= isset($dados['motorista_cel']) ? $dados['motorista_cel'] : ''; ?>" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tb_logradouros_logradouro_id" class="col-md-3 control-label">Endereço*</label>
         <div class="col-md-4">
-          <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
+          <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id" required="required">
             <option value="">Selecione...</option>
             <?php
             $readerlog = new Read;
@@ -100,6 +117,14 @@
             endif;
             ?>
           </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="motorista_end_numero" class="col-md-3 control-label">Número</label>
+        <div class="col-md-2">
+          <input type="text" class="form-control" name="motorista_end_numero" id="motorista_end_numero" placeholder="Número da casa"
+          value="<?= isset($dados['motorista_end_numero']) ? $dados['motorista_end_numero'] : ''; ?>" />
         </div>
       </div>
 

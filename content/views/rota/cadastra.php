@@ -107,8 +107,11 @@
               $veiculos->getVeiculos($stat);
               if ($veiculos->getResult()):
                 foreach ($veiculos->getResult() as $veiculo):
-                  $description = $veiculo['veiculo_placa'] . ' - ' . $veiculo['veiculo_marca'] . ' - ' . $veiculo['veiculo_modelo'];
-                  echo "<option value=\"{$veiculo['veiculo_id']}\">{$description}</option>";
+                  if(0 < $veiculo['veiculo_vagas'])
+                  {
+                    $description = $veiculo['veiculo_placa'] . ' - ' . $veiculo['veiculo_marca'] . ' - ' . $veiculo['veiculo_modelo'];
+                    echo "<option value=\"{$veiculo['veiculo_id']}\">{$description}</option>";
+                  }
                 endforeach;
               endif;
               ?>
@@ -124,13 +127,13 @@
             <div class="col-md-4">
               <div class="input-group">
                 <div class="input-group-addon">Início</div>
-                <input type="date" name="inicio" class="form-control" placeholder="<?= date('d/m/Y'); ?>" />
+                <input type="date" name="inicio" class="form-control" placeholder="<?= date('d/m/Y'); ?>" required="required" />
               </div>
             </div>
             <div class="col-md-4">
               <div class="input-group">
                 <div class="input-group-addon">Fim</div>
-                <input type="date" name="fim" class="form-control" placeholder="<?= date('d/m/Y', strtotime('+1 year')); ?>" />
+                <input type="date" name="fim" class="form-control" placeholder="<?= date('d/m/Y', strtotime('+1 year')); ?>" required="required" />
               </div>
             </div>
           </div>
@@ -141,7 +144,7 @@
         <div class="form-group">
           <label for="observacoes" class="col-md-3 control-label">Observações</label>
           <div class="col-md-4">
-            <textarea class="form-control" name="observacoes" id="observacoes" required="required"></textarea>
+            <textarea class="form-control" name="observacoes" id="observacoes" placeholder="Este campo serve apenas para observações, o mesmo é opcional."></textarea>
           </div>
         </div>
 

@@ -43,11 +43,11 @@
                   <tr>
                     <td><?= $regs['instituicao_nome']; ?></td>
                     <td><?= $regs['bairros_nome']; ?></td>
-                    <td><?= $regs['instituicao_status'] ? '<span class="label label-success">Ativa</span>' : '<span class="label label-danger">Inativa</span>'; ?></td>
+                    <td><?= $regs['instituicao_status'] ? '<span class="label label-success">Ativa</span>' : '<span class="label label-danger">Desligada</span>'; ?></td>
                     <td>
                       <a href="<?= HOME; ?>escola/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
                       <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
-                        data-local="escola" title="Excluir"><i class="fa fa-minus-circle"></i></button>
+                        data-local="escola" title="Inativar/Ativar"><i class="fa fa-minus-circle"></i></button>
                       </td>
                     </tr>
                     <?php

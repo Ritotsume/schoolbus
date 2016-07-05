@@ -128,7 +128,7 @@
             <div class="form-group">
               <label for="" class="col-xs-3"></label>
               <div class="col-xs-2">
-                <button type="submit" class="btn btn-success btn-block" name="editar"><i class="fa fa-download"></i> Atualizar</button>
+                <button type="button" class="btn btn-warning btn-block print-form" name="editar"><i class="fa fa-print"></i> Imprimir</button>
               </div>
             </div>
             <?php

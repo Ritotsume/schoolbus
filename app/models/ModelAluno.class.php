@@ -10,8 +10,6 @@ class ModelAluno {
   private $rowcount;
 
   public function ModelCreator(array $data) {
-    //verificar aluno se o mesmo existe antes de cadastrar....
-    //
     $this->data = $data;
 
     $this->data['aluno_nome_url'] = Asserts::CheckName($this->data['aluno_nome']);
@@ -21,6 +19,14 @@ class ModelAluno {
 
     $create->Inserter(self::Entity, $this->data);
     if ($create->getResult()):
+      $rota = new ModelRotas;
+      $veiculo = $rota->getRota($this->data['tb_rotas_rota_id']);
+      if($veiculo)
+      {
+        $idVeiculo = $veiculo[0]['tb_veiculos_veiculo_id'];
+        $bus = new ModelVeiculo;
+        $bus->setVaga($idVeiculo);
+      }
       $this->result = $create->getResult();
       $this->rowcount = $create->getRowCount();
     else:
@@ -32,13 +38,21 @@ class ModelAluno {
   public function ModelDelete($id) {
     $this->aluno = (int) $id;
 
-    $delete = new Delete();
-    $delete->Deleter(self::Entity, 'where aluno_id = :id', "id={$this->aluno}");
-    if ($delete->getResult()):
-      $this->result = true;
-    else:
+    $read = new Read;
+    $read->Reader(self::Entity, 'where aluno_id = :id', "id={$this->aluno}");
+
+    if($read->getResult()){
+      $status = $read->getResult()[0]['aluno_status'];
+      $update = new Update;
+      $update->Updater(self::Entity, array('aluno_status' => ((1 == $status) ? 0 : 1)), 'where aluno_id = :id', "id={$this->aluno}");
+      if ($update->getResult()):
+        $this->result = true;
+      else:
+        $this->result = false;
+      endif;
+    }else{
       $this->result = false;
-    endif;
+    }
   }
 
   public function ModelUpdate($id, array $dados) {

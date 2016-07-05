@@ -11,7 +11,7 @@ if (isset($del) && !empty($del)):
         $deleteI = new ModelVeiculo();
         $deleteI->ModelDelete($del);
         if ($deleteI->getResult()):
-            ADSError('Deletado com sucesso!', CRAZY_ACCEPT);
+            ADSError('Alterado com sucesso!', CRAZY_ACCEPT);
         else:
             ADSError('errado denovo!', CRAZY_ERROR);
         endif;

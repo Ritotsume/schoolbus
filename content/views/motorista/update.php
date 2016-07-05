@@ -43,41 +43,57 @@
         </div>
         <div class="card-body">
           <div class="form-group">
-            <label for="motorista_nome" class="col-xs-3 control-label">Nome</label>
+            <label for="motorista_nome" class="col-xs-3 control-label">Nome*</label>
             <div class="col-xs-5">
-              <input type="text" class="form-control" name="motorista_nome" id="motorista_nome" placeholder="Francisco"
-              value="<?= isset($dados['motorista_nome']) ? $dados['motorista_nome'] : $read->getResult()[0]['motorista_nome']; ?>" />
+              <input type="text" class="form-control" name="motorista_nome" id="motorista_nome" placeholder="Nome do motorista"
+              value="<?= isset($dados['motorista_nome']) ? $dados['motorista_nome'] : $read->getResult()[0]['motorista_nome']; ?>" required="required" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="motorista_sobrenome" class="col-xs-3 control-label">Sobrenome</label>
+            <label for="motorista_sobrenome" class="col-xs-3 control-label">Sobrenome*</label>
             <div class="col-xs-5">
-              <input type="text" class="form-control" name="motorista_sobrenome" id="motorista_sobrenome" placeholder="Silva Xavier"
-              value="<?= isset($dados['motorista_sobrenome']) ? $dados['motorista_sobrenome'] : $read->getResult()[0]['motorista_sobrenome']; ?>" />
+              <input type="text" class="form-control" name="motorista_sobrenome" id="motorista_sobrenome" placeholder="Sobrenome do motorista"
+              value="<?= isset($dados['motorista_sobrenome']) ? $dados['motorista_sobrenome'] : $read->getResult()[0]['motorista_sobrenome']; ?>" required="required" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="motorista_rg" class="col-xs-3 control-label">RG</label>
+            <label for="motorista_rg" class="col-xs-3 control-label">RG*</label>
             <div class="col-xs-4">
-              <input type="text" class="form-control" name="motorista_rg" id="motorista_rg" placeholder="123456" required="required"
+              <input type="text" class="form-control" name="motorista_rg" id="motorista_rg" placeholder="RG do motorista" required="required"
               value="<?= isset($dados['motorista_rg']) ? $dados['motorista_rg'] : $read->getResult()[0]['motorista_rg']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="aluno_cpf" class="col-xs-3 control-label">CPF</label>
+            <label for="motorista_cpf" class="col-xs-3 control-label">CPF*</label>
             <div class="col-xs-4">
-              <input type="text" class="form-control" name="motorista_cpf" id="motorista_cpf" placeholder="123.456.789-00" required="required"
+              <input type="text" class="form-control" name="motorista_cpf" id="motorista_cpf" placeholder="CPF do motorista" required="required"
               value="<?= isset($dados['motorista_cpf']) ? $dados['motorista_cpf'] : $read->getResult()[0]['motorista_cpf']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="tb_logradouros_logradouro_id" class="col-xs-3 control-label">Endereço</label>
+            <label for="motorista_tel" class="col-md-3 control-label">Telefone</label>
+            <div class="col-md-2">
+              <input type="tel" class="form-control" name="motorista_tel" id="motorista_tel" placeholder="Telefone"
+              value="<?= isset($dados['motorista_tel']) ? $dados['motorista_tel'] : $read->getResult()[0]['motorista_tel']; ?>" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="motorista_cel" class="col-md-3 control-label">Celular</label>
+            <div class="col-md-2">
+              <input type="tel" class="form-control" name="motorista_cel" id="motorista_cel" placeholder="Celular"
+              value="<?= isset($dados['motorista_cel']) ? $dados['motorista_cel'] : $read->getResult()[0]['motorista_cel']; ?>" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tb_logradouros_logradouro_id" class="col-xs-3 control-label">Endereço*</label>
             <div class="col-xs-5">
-              <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id">
+              <select class="form-control" name="tb_logradouros_logradouro_id" id="tb_logradouros_logradouro_id" required="required">
                 <?php
                 $readerlog = new Read;
                 $readerlog->Reader('tb_logradouros', 'inner join tb_bairros on '
@@ -96,6 +112,14 @@
               endif;
               ?>
             </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="motorista_end_numero" class="col-md-3 control-label">Número</label>
+          <div class="col-md-2">
+            <input type="text" class="form-control" name="motorista_end_numero" id="motorista_end_numero" placeholder="Número da casa"
+            value="<?= isset($dados['motorista_end_numero']) ? $dados['motorista_end_numero'] : $read->getResult()[0]['motorista_end_numero']; ?>" />
           </div>
         </div>
 

@@ -29,13 +29,21 @@ class ModelMotorista {
     public function ModelDelete($id) {
         $this->motorista = (int) $id;
 
-        $delete = new Delete();
-        $delete->Deleter(self::Entity, 'where motorista_id = :id', "id={$this->motorista}");
-        if ($delete->getResult()):
-            $this->result = true;
-        else:
+        $read = new Read;
+        $read->Reader(self::Entity, 'where motorista_id = :id', "id={$this->motorista}");
+
+        if($read->getResult()){
+            $status = $read->getResult()[0]['motorista_status'];
+            $update = new Update;
+            $update->Updater(self::Entity, array('motorista_status' => ((1 == $status) ? 0 : 1)), 'where motorista_id = :id', "id={$this->motorista}");
+            if ($update->getResult()):
+                $this->result = true;
+            else:
+                $this->result = false;
+            endif;
+        }else{
             $this->result = false;
-        endif;
+        }
     }
 
     public function ModelUpdate($id, array $dados) {

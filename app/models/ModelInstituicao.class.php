@@ -32,13 +32,21 @@ class ModelInstituicao {
     public function ModelDelete($id) {
         $this->instituicao = (int) $id;
 
-        $delete = new Delete();
-        $delete->Deleter(self::Entity, 'where instituicao_id = :id', "id={$this->instituicao}");
-        if ($delete->getResult()):
-            $this->result = true;
-        else:
+        $read = new Read;
+        $read->Reader(self::Entity, 'where instituicao_id = :id', "id={$this->instituicao}");
+
+        if($read->getResult()){
+            $status = $read->getResult()[0]['instituicao_status'];
+            $update = new Update;
+            $update->Updater(self::Entity, array('instituicao_status' => ((1 == $status) ? 0 : 1)), 'where instituicao_id = :id', "id={$this->instituicao}");
+            if ($update->getResult()):
+                $this->result = true;
+            else:
+                $this->result = false;
+            endif;
+        }else{
             $this->result = false;
-        endif;
+        }
     }
 
     public function ModelUpdate($id, array $dados) {

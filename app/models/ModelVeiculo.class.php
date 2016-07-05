@@ -11,6 +11,7 @@ class ModelVeiculo {
 
     public function ModelCreator(array $data) {
         $this->data = $data;
+        $this->data['veiculo_vagas'] = 0;
 
         $create = new Create();
 
@@ -25,28 +26,68 @@ class ModelVeiculo {
     }
 
     public function ModelDelete($idveiculo) {
-        $this->veiculo = $idveiculo;
+        $this->veiculo = (int) $idveiculo;
 
-        $delete = new Delete();
-        $delete->Deleter(self::Entity, 'where veiculo_id = :id', "id={$this->veiculo}");
-        if ($delete->getResult()):
-            $this->result = true;
-        else:
+        $read = new Read;
+        $read->Reader(self::Entity, 'where veiculo_id = :id', "id={$this->veiculo}");
+
+        if($read->getResult()){
+            $status = $read->getResult()[0]['veiculo_status'];
+            $update = new Update;
+            $update->Updater(self::Entity, array('veiculo_status' => ((1 == $status) ? 0 : 1)), 'where veiculo_id = :id', "id={$this->veiculo}");
+            if ($update->getResult()):
+                $this->result = true;
+            else:
+                $this->result = false;
+            endif;
+        }else{
             $this->result = false;
-        endif;
+        }
     }
 
     public function ModelUpdate($idveiculo, array $dados) {
         $this->veiculo = $idveiculo;
         $this->data = $dados;
 
-        $update = new Update();
-        $update->Updater(self::Entity, $this->data, 'where veiculo_id = :id', "id={$this->veiculo}");
-        if ($update->getResult()):
-            $this->result = true;
-        else:
-            $this->result = false;
-        endif;
+        $read = new Read;
+        $read->Reader(self::Entity, 'where veiculo_id = :id', "id={$this->veiculo}");
+
+        if($read->getResult()){
+            $poltronas = (int) $read->getResult()[0]['veiculo_poltronas'];
+            $vagas = (int) $read->getResult()[0]['veiculo_vagas'];
+            $diffPoltronas = $this->data['veiculo_poltronas'] - $poltronas;
+            if(($this->data['veiculo_poltronas'] > $vagas) && ($diffPoltronas < $vagas))
+            {
+                $this->data['veiculo_vagas'] = $vagas + $diffPoltronas;
+            }else{
+                $this->data['veiculo_poltronas'] = $poltronas;
+            }
+            $update = new Update();
+            $update->Updater(self::Entity, $this->data, 'where veiculo_id = :id', "id={$this->veiculo}");
+            if ($update->getResult()):
+                $this->result = true;
+            else:
+                $this->result = false;
+            endif;
+        }
+    }
+
+    public function setVaga($veiculo)
+    {
+        $read = new Read;
+        $read->Reader(self::Entity, 'where veiculo_id = :id', "id={$veiculo}");
+        if($read->getResult())
+        {
+            $vagas = (int) $read->getResult()[0]['veiculo_vagas'];
+            if(0 < $vagas)
+            {
+                $update = new Update;
+                $update->Updater('tb_veiculos', array('veiculo_vagas' => ($vagas - 1)), 'where veiculo_id = :id', "id={$veiculo}");
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
     public function getVeiculos($status = null)

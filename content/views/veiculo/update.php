@@ -41,49 +41,50 @@
         <div class="card-body">
 
           <div class="form-group">
-            <label for="veiculo_placa" class="col-xs-3 control-label">*Placa</label>
+            <label for="veiculo_placa" class="col-xs-3 control-label">Placa*</label>
             <div class="col-xs-2">
-              <input type="text" name="veiculo_placa" id="veiculo_placa" placeholder="ABC1234" class="form-control"
+              <input type="text" name="veiculo_placa" id="veiculo_placa" placeholder="Placa do veículo" class="form-control" required="required"
               value="<?= isset($dados['veiculo_placa']) ? $dados['veiculo_placa'] : $read->getResult()[0]['veiculo_placa']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="veiculo_marca" class="col-xs-3 control-label">*Marca</label>
+            <label for="veiculo_marca" class="col-xs-3 control-label">Marca*</label>
             <div class="col-xs-3">
-              <input type="text" name="veiculo_marca" id="veiculo_marca" placeholder="Marcopolo" class="form-control"
+              <input type="text" name="veiculo_marca" id="veiculo_marca" placeholder="Marca do veículo" class="form-control" required="required"
               value="<?= isset($dados['veiculo_marca']) ? $dados['veiculo_marca'] : $read->getResult()[0]['veiculo_marca']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="veiculo_modelo" class="col-xs-3 control-label">*Modelo</label>
+            <label for="veiculo_modelo" class="col-xs-3 control-label">Modelo*</label>
             <div class="col-xs-3">
-              <input type="text" name="veiculo_modelo" id="veiculo_modelo" placeholder="A770" class="form-control"
+              <input type="text" name="veiculo_modelo" id="veiculo_modelo" placeholder="Modelo do veículo" class="form-control" required="required"
               value="<?= isset($dados['veiculo_modelo']) ? $dados['veiculo_modelo'] : $read->getResult()[0]['veiculo_modelo']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="veiculo_poltronas" class="col-xs-3 control-label">*Poltronas</label>
+            <label for="veiculo_poltronas" class="col-xs-3 control-label">Poltronas*</label>
             <div class="col-xs-2">
-              <input type="number" name="veiculo_poltronas" id="veiculo_poltronas" placeholder="44" class="form-control"
-              value="<?= isset($dados['veiculo_poltronas']) ? $dados['veiculo_poltronas'] : $read->getResult()[0]['veiculo_poltronas']; ?>" />
+              <input type="text" name="veiculo_poltronas" id="veiculo_poltronas" placeholder="Quantidade de assentos do veículo" class="form-control"
+              value="<?= isset($dados['veiculo_poltronas']) ? $dados['veiculo_poltronas'] : $read->getResult()[0]['veiculo_poltronas']; ?>" required="required" />
             </div>
           </div>
 
           <div class="form-group">
             <label for="veiculo_ano" class="col-xs-3 control-label">Ano</label>
             <div class="col-xs-2">
-              <input type="text" name="veiculo_ano" id="veiculo_ano" placeholder="2010/2011" class="form-control"
+              <input type="text" name="veiculo_ano" id="veiculo_ano" placeholder="Ano de fabricação e ano do modelo" class="form-control"
+              pattern="^[0-9]{4}[/][0-9]{4}$" title="Deve estar nesse formato xxxx/xxxx"
               value="<?= isset($dados['veiculo_ano']) ? $dados['veiculo_ano'] : $read->getResult()[0]['veiculo_ano']; ?>" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="veiculo_agregado" class="col-xs-3 control-label">Tipo de contrato</label>
+            <label for="veiculo_agregado" class="col-xs-3 control-label">Tipo de contrato*</label>
             <div class="col-xs-3">
-              <select name="veiculo_agregado" id="veiculo_agregado" class="form-control">
+              <select name="veiculo_agregado" id="veiculo_agregado" class="form-control" required="required">
                 <option value="">Selecione...</option>
                 <option value="1" <?= (isset($dados['veiculo_agregado']) && $dados['veiculo_agregado'] == 1) || $read->getResult()[0]['veiculo_agregado'] == 1 ? 'selected="selected"' : ''; ?>>Agregado</option>
                 <option value="0" <?= (isset($dados['veiculo_agregado']) && $dados['veiculo_agregado'] == 0) || $read->getResult()[0]['veiculo_agregado'] == 0 ? 'selected="selected"' : ''; ?>>Prefeitura - Município</option>
@@ -94,7 +95,7 @@
           <div class="form-group">
             <label for="veiculo_kms" class="col-xs-3 control-label">Kms rodados</label>
             <div class="col-xs-3">
-              <input type="text" name="veiculo_kms" id="veiculo_kms" placeholder="1000" class="form-control"
+              <input type="text" name="veiculo_kms" id="veiculo_kms" placeholder="Kms rodados" class="form-control"
               value="<?= isset($dados['veiculo_kms']) ? $dados['veiculo_kms'] : $read->getResult()[0]['veiculo_kms']; ?>" />
             </div>
           </div>

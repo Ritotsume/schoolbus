@@ -12,9 +12,9 @@ if (isset($del) && !empty($del)):
         $deleteI = new ModelRotas();
         $deleteI->ModelDelete($del);
         if ($deleteI->getResult()):
-            ADSError('Deletado com sucesso!', CRAZY_ACCEPT);
+            ADSError('Alterada com sucesso!', CRAZY_ACCEPT);
         else:
-            ADSError('Erro ao deletar a rota. Certifique-se de que ela não esteja associada a algum aluno.', CRAZY_ERROR);
+            ADSError('Erro ao inativar a rota.', CRAZY_ERROR);
         endif;
     endif;
 endif;

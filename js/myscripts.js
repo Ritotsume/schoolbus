@@ -79,7 +79,7 @@ var deleteReg = function() {
     var keys = $(this).attr('dataStr');
     var local = $(this).attr('data-local');
     var texto = '';
-    bootbox.confirm('Deseja apagar esse registro?', function(resp){
+    bootbox.confirm('Deseja alterar esse registro?', function(resp){
       if(resp){
         $.ajax({
           url: './ajax/model' + local + '.ajax.php',
@@ -201,3 +201,16 @@ var appendLogradouros = function()
 }
 fecharItem();
 appendLogradouros();
+
+var printForm = function(){
+  $('.print-form').on('click', function(){
+    var form = $('form').find('div');
+
+    tela_impressao = window.open('about:blank');
+
+    tela_impressao.document.write(form);
+    tela_impressao.window.print();
+    tela_impressao.window.close();
+  });
+}
+printForm();

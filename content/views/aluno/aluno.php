@@ -15,7 +15,7 @@
           <?php
           $readaluno = new ModelAluno();
 
-          $readaluno->getAlunos(1);
+          $readaluno->getAlunos();
 
           if ($readaluno->getRowCount() > 0):
             ?>
@@ -44,11 +44,11 @@
                   <tr>
                     <td><?= $regs['aluno_nome'] . ' ' . $regs['aluno_sobrenome']; ?></td>
                     <td><?= $regs['bairros_nome']; ?></td>
-                    <td><?= $regs['aluno_status'] ? '<span class="label label-success">Ativo</span>' : '<span class="label label-danger">Inativo</span>'; ?></td>
+                    <td><?= $regs['aluno_status'] ? '<span class="label label-success">Ativo</span>' : '<span class="label label-danger">Desligado</span>'; ?></td>
                     <td>
                       <a href="<?= HOME; ?>aluno/update/<?= $id; ?>" class="btn btn-warning" title="Editar"><i class="fa fa-edit"></i></a>
                       <button type="button" class="btn btn-danger delete-reg" dataStr="<?= 'var=delete&del=' . $id; ?>"
-                        data-local="aluno" title="Excluir"><i class="fa fa-minus-circle"></i></button>
+                        data-local="aluno" title="Ativar/Inativar"><i class="fa fa-minus-circle"></i></button>
                       </td>
                     </tr>
                     <?php

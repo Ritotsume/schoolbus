@@ -8,7 +8,6 @@
 <!-- Javascript Libs -->
 <script type="text/javascript" src="<?= HOME; ?>lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?= HOME; ?>lib/js/Chart.min.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/bootstrap-switch.min.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/jquery.matchHeight-min.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/jquery.dataTables.min.js"></script>
@@ -21,8 +20,10 @@
 <script type="text/javascript" src="<?= HOME; ?>lib/js/select2.full.min.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/buttons.print.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>lib/js/dataTables.buttons.js"></script>
+<script type="text/javascript" src="<?= HOME; ?>lib/js/Chart.min.js"></script>
 <!-- Javascript -->
-<script type="text/javascript" src="<?= HOME; ?>js/app.js"></script>
 <script type="text/javascript" src="<?= HOME; ?>js/myscripts.js"></script>
+<script type="text/javascript" src="<?= HOME; ?>js/app.js"></script>
+<script type="text/javascript" src="<?= HOME; ?>js/chartjs.js"></script>
 </body>
 </html>

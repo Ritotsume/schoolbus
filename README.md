@@ -1,4 +1,4 @@
-SchoolBus version 1.1
+SchoolBus version 0.0.1
 
 Este é um alpha do sistema SchoolBus, o projeto ainda está em fase de desenvolvimento.
 
